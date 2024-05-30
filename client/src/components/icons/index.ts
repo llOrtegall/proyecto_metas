@@ -1,5 +1,6 @@
 export { CalendarAntIcon } from './CalendarAntIcon'
 export { CalendarIcon } from './CalendarIcon'
+export { CategoriaIcon } from './CategIcons'
 export { Dashboard } from './DashBoardIcon'
 export { WarningIcon } from './WarninIcon'
 export { ArrowsIcon } from './ArrowsIcon'

@@ -16,7 +16,7 @@ export const useAuthActions = (setUser: React.Dispatch<React.SetStateAction<User
       try {
         const res = await getProfile({ token })
         setUser(res)
-        navigate('/home')
+        navigate('/')
       } catch (err) {
         console.error(err)
         localStorage.removeItem('tokenMetas')

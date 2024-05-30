@@ -12,8 +12,6 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ isAllowed, redirectTo 
     return <Navigate to={redirectTo} />
   }
 
-  // flex flex-col px-4 gap-2 justify-around h-[90vh] items-center pt-10 w-[30vw] 2xl'
-
   return (
     <>
       <nav className='w-3/12'>
