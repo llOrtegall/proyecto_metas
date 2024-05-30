@@ -16,10 +16,10 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ isAllowed, redirectTo 
 
   return (
     <>
-      <nav className='w-3/12 bg-blue-200 flex flex-col gap-4 items-center justify-around'>
+      <nav className='w-3/12'>
         <NavBar />
       </nav>
-      <main className='w-9/12 bg-blue-400 overflow-y-auto'>
+      <main className='w-9/12'>
         <Outlet />
       </main>
     </>
