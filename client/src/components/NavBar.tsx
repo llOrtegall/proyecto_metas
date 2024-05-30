@@ -1,10 +1,9 @@
 import { CalendarAntIcon, CalendarIcon, Dashboard, DocsIcon, SunIcon, CategoriaIcon } from './icons'
 import { useTheme } from '../context/ThemeContext'
-// import { useAuth } from '../auth/AuthContext.jsx'
 import { NavLinkItem } from './ui/NavLinkItem'
+import { useAuth } from '../auth/AuthContext'
 import { LogoImage } from './ui/LogoImage'
 import { Switch } from '@tremor/react'
-import { useAuth } from '../auth/AuthContext'
 
 const navLinks = [
   { id: 1, path: '/', icon: Dashboard, label: 'Resumen De Aspiración' },
