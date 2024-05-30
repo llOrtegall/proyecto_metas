@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import { NavBar } from './ui/NavBar'
+import { NavBar } from './NavBar'
 import { type FC } from 'react'
 
 interface ProtectedRouteProps {
@@ -12,9 +12,11 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ isAllowed, redirectTo 
     return <Navigate to={redirectTo} />
   }
 
+  // flex flex-col px-4 gap-2 justify-around h-[90vh] items-center pt-10 w-[30vw] 2xl'
+
   return (
     <>
-      <nav className='w-3/12 bg-blue-200'>
+      <nav className='w-3/12 bg-blue-200 flex flex-col gap-4 items-center justify-around'>
         <NavBar />
       </nav>
       <main className='w-9/12 bg-blue-400 overflow-y-auto'>
