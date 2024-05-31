@@ -46,7 +46,7 @@ function App () {
       <Routes>
         <Route path='/login' element={<LoginPage />} />
         <Route element={<ProtectedRoute isAllowed={!!user} pdvInfo={pdv} />}>
-          <Route path='/' element={<ResumenPage nombres={user.nombres} codigo={user.codigo} username={user.username} />} />
+          <Route path='/' element={<ResumenPage nombres={user.nombres} codigo={user.codigo} username={user.username} catergoria={pdv.CATEGORIA} version={pdv.VERSION} />} />
           <Route path='/aspiracionDia' element={<AspDiaPage />} />
           <Route path='/aspiracionMesActual' element={<AspMesPage />} />
           <Route path='/aspiracionMesAnterior' element={<AspMenAntPage />} />

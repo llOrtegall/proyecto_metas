@@ -1,14 +1,17 @@
 import { ProgressCircleComponent } from '../components/ui/ProgressCircle'
 import { VentasDiaResumen } from '../components/ui/VentaDiaResumen'
 import { GenerateQR } from '../components/ui/GeneraQrCod'
+import { RenderCategoria } from '../components/ui/RenderCategoria'
 
 interface PropsResumen {
   nombres: string
   codigo: number
   username: string
+  version: string
+  catergoria: string
 }
 
-function ResumenPage ({ nombres, codigo, username }: PropsResumen) {
+function ResumenPage ({ nombres, codigo, username, catergoria, version }: PropsResumen) {
   return (
     <section className='w-full px-1 grid grid-cols-3 text-center font-semibold rounded-lg gap-2 text-gray-700 dark:text-white'>
       <h3 className='col-span-3 py-2 rounded-lg bg-slate-300 dark:bg-slate-900 dark:border dark:border-gray-500 xl:text-lg 2xl:text-2xl 2xl:py-4'>
@@ -28,7 +31,7 @@ function ResumenPage ({ nombres, codigo, username }: PropsResumen) {
       </section>
 
       <figure className='col-span-2 flex flex-col items-center justify-center bg-slate-300 dark:bg-slate-900 rounded-md dark:border dark:border-gray-500'>
-        {/* <RenderCategoria cat={catergoria} ver={version} /> */}
+        <RenderCategoria cat={catergoria} ver={version} size={120} />
         <div>test</div>
       </figure>
 
