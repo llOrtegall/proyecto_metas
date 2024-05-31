@@ -27,19 +27,21 @@ function App () {
     }
   }, [])
 
+  // existe problema con este useEfeect al actualizar la page
+  // se ejecuta antes de que se actualice el user y por ende no se envia el codigo
   useEffect(() => {
-    console.log(user.codigo)
     if (user.codigo !== 0) {
       axios.post('/infopdv', { codigo: user.codigo })
         .then((res) => {
-          console.log(res.data)
           setPdv(res.data)
         })
         .catch((err) => {
           console.log(err)
         })
     }
-  }, [user.codigo])
+  }, [user])
+
+  console.log(user.codigo)
 
   return (
     <>
