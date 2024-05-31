@@ -30,7 +30,7 @@ function App () {
       <Routes>
         <Route path='/login' element={<LoginPage />} />
         <Route element={<ProtectedRoute isAllowed={!!user} />}>
-          <Route path='/' element={<ResumenPage />} />
+          <Route path='/' element={<ResumenPage nombres={user.nombres} codigo={user.codigo} username={user.username} />} />
           <Route path='/aspiracionDia' element={<AspDiaPage />} />
           <Route path='/aspiracionMesActual' element={<AspMesPage />} />
           <Route path='/aspiracionMesAnterior' element={<AspMenAntPage />} />
