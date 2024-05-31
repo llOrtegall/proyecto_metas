@@ -1,9 +1,20 @@
+import { useEffect } from 'react'
 import { useAuth } from '../auth/AuthContext'
+import axios from 'axios'
 
 export function InfoPdvComponent () {
   const { user } = useAuth()
 
-  console.log(user.codigo)
+  useEffect(() => {
+    axios.post('/infopdv', { codigo: user.codigo })
+      .then((res) => {
+        console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
+
   return (
     <section className='grid grid-cols-2 w-full sm:text-xs lg:text-lg justify-around py-2 gap-2'>
       <article className='flex items-center justify-center text-center border py-1 rounded-md bg-slate-300 dark:bg-slate-900 font-semibold'>

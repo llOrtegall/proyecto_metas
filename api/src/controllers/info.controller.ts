@@ -9,7 +9,10 @@ export async function getPdvCod(req: Request, res: Response) {
   }
 
   try {
-    const pdv = await InfoPdv.findOne({ where: { CODIGO: codigo } });
+    const pdv = await InfoPdv.findOne({ 
+      attributes: ['NOMBRE', 'SUPERVISOR', 'DIRECCION', 'CATEGORIA', 'VERSION'],
+      where: { CODIGO: codigo } 
+    });
 
     if (!pdv) {
       return res.status(404).json({ message: 'Punto de venta no encontrado' });
