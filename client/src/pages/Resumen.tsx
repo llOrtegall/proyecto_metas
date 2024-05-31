@@ -1,10 +1,10 @@
 import { ProgressCircleComponent } from '../components/ui/ProgressCircle'
 import { VentasDiaResumen } from '../components/ui/VentaDiaResumen'
-import { GenerateQR } from '../components/ui/GeneraQrCod'
 import { RenderCategoria } from '../components/ui/RenderCategoria'
+import { determineProgressColor } from '../utils/funtions'
+import { GenerateQR } from '../components/ui/GeneraQrCod'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { determineProgressColor } from '../utils/funtions'
 
 interface PropsResumen {
   nombres: string
@@ -18,10 +18,23 @@ function ResumenPage ({ nombres, codigo, username, catergoria, version }: PropsR
   const [data, setData] = useState({ venta_actual: 0, aspiracion: 0, cumplimiento: 0 })
 
   useEffect(() => {
-    axios.post('/metasDia', { codigo })
-      .then(res => setData(res.data))
-      .catch(err => console.error(err))
-  }, [])
+    if (codigo !== 0) {
+      // Fetch data immediately
+      axios.post('/metasDia', { codigo })
+        .then(res => setData(res.data))
+        .catch(err => console.error(err))
+
+      // Then fetch data every 5 minutes
+      const intervalId = setInterval(() => {
+        axios.post('/metasDia', { codigo })
+          .then(res => setData(res.data))
+          .catch(err => console.error(err))
+      }, 5 * 60 * 1000) // 5 minutes in milliseconds
+
+      // Clear interval on component unmount
+      return () => clearInterval(intervalId)
+    }
+  }, [codigo])
 
   return (
     <section className='w-full px-1 grid grid-cols-3 text-center font-semibold rounded-lg gap-2 text-gray-700 dark:text-white'>

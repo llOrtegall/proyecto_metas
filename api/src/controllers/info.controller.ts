@@ -10,7 +10,7 @@ export async function getPdvCod(req: Request, res: Response) {
 
   try {
     const pdv = await InfoPdv.findOne({ 
-      attributes: ['NOMBRE', 'SUPERVISOR', 'DIRECCION', 'CATEGORIA', 'VERSION'],
+      attributes: ['NOMBRE', 'SUPERVISOR', 'DIRECCION', 'CATEGORIA', 'VERSION', 'ZONA'],
       where: { CODIGO: codigo } 
     });
 

@@ -4,4 +4,5 @@ export interface PDVINFO {
   NOMBRE: string
   SUPERVISOR: string
   VERSION: string
+  ZONA: string
 }

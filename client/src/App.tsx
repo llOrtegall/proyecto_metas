@@ -10,12 +10,14 @@ import AspDiaPage from './pages/ApsDia'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { PDVINFO } from './types/Pdv'
+import SugeridosPage from './pages/Sugeridos'
 
 axios.defaults.baseURL = 'http://localhost:3000/api/v1'
 
+// TODO: a futuro debemos aplicar lazy load para la carga de las paginas ya que el bundle es muy grande
 function App () {
   const { user, login, logout } = useAuth()
-  const [pdv, setPdv] = useState<PDVINFO>({ CATEGORIA: '', VERSION: '', DIRECCION: '', NOMBRE: '', SUPERVISOR: '' })
+  const [pdv, setPdv] = useState<PDVINFO>({ CATEGORIA: '', VERSION: '', DIRECCION: '', NOMBRE: '', SUPERVISOR: '', ZONA: '' })
 
   useEffect(() => {
     const token = localStorage.getItem('tokenMetas')
@@ -27,8 +29,6 @@ function App () {
     }
   }, [])
 
-  // existe problema con este useEfeect al actualizar la page
-  // se ejecuta antes de que se actualice el user y por ende no se envia el codigo
   useEffect(() => {
     if (user.codigo !== 0) {
       axios.post('/infopdv', { codigo: user.codigo })
@@ -39,20 +39,19 @@ function App () {
           console.log(err)
         })
     }
-  }, [user])
+  }, [user.codigo])
 
-  console.log(user.codigo)
-
+  console.log(pdv)
   return (
     <>
       <Routes>
         <Route path='/login' element={<LoginPage />} />
         <Route element={<ProtectedRoute isAllowed={!!user} pdvInfo={pdv} />}>
           <Route path='/' element={<ResumenPage nombres={user.nombres} codigo={user.codigo} username={user.username} catergoria={pdv.CATEGORIA} version={pdv.VERSION} />} />
-          <Route path='/aspiracionDia' element={<AspDiaPage />} />
+          <Route path='/aspiracionDia' element={<AspDiaPage codigo={user.codigo} zona={pdv.ZONA} />} />
           <Route path='/aspiracionMesActual' element={<AspMesPage />} />
           <Route path='/aspiracionMesAnterior' element={<AspMenAntPage />} />
-          <Route path='/sugeridos' element={<AspDiaPage />} />
+          <Route path='/sugeridos' element={<SugeridosPage />} />
           <Route path='/historial' element={<HistCatPage />} />
         </Route>
       </Routes>

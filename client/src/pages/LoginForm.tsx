@@ -9,6 +9,8 @@ function LoginPage () {
 
   const { login } = useAuth()
 
+  // !! FALTA AGREGAR MENSAJES DE ERRORES O ALERTAS!!
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
 
