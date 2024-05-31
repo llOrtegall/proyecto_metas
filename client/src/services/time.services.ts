@@ -1,12 +1,21 @@
 import axios from 'axios'
 
-interface IHora {
+interface Time {
   fecha: string
+}
+
+interface Time2 {
   hora: string
 }
 
-export const getColombiaTime = async (): Promise<IHora> => {
+export const getColombiaTimeFecha = async (): Promise<Time> => {
   const response = await axios.get('/dataTime')
-  const { fecha, hora } = response.data
-  return { fecha, hora }
+  const { fecha } = await response.data
+  return { fecha } as Time
+}
+
+export const getColombiaTimeHora = async (): Promise<Time2> => {
+  const response = await axios.get('/dataTime2')
+  const { hora } = await response.data
+  return { hora } as Time2
 }
