@@ -1,30 +1,49 @@
+import { MetasProducts } from '../models/metasproducts.model'
 import { Request, Response } from "express"
-
-/*
-async function BuscarMetasDelDia (codigo) {
-  const [metas] = await pool.execute(
-    `
-    select 
-      mp.CHANCE+mp.PAGAMAS+mp.PAGATODO+mp.GANE5+mp.PATA_MILLONARIA+mp.DOBLECHANCE+mp.CHANCE_MILLONARIO venta_actual,
-      mp.PROMEDIO_DIARIO_CHANCE+mp.PROMEDIO_DIARIO_PAGAMAS+mp.PROMEDIO_DIARIO_PAGATODO+mp.PROMEDIO_DIARIO_PATAMI+mp.PROMEDIO_DIARIO_DOBLECHANCE+mp.PROMEDIO_DIARIO_CHMILL asp_dia
-      from METASPRODUCTOS mp, INFORMACION_PUNTOSVENTA ip WHERE mp.SUCURSAL = ${codigo} and mp.FECHA=CURDATE() and mp.SUCURSAL=ip.CODIGO;
-    `
-  )
-  return metas
-}
-*/
+import { escape } from 'querystring'
+import { fn } from "sequelize"
 
 export const metasDelDia = async (req: Request, res: Response) => {
   const { codigo } = req.body
 
-  if(!codigo) return res.status(400).json({ message: 'Faltan codigo' })
+  if (!codigo) return res.status(400).json({ message: 'Faltan codigo' })
 
-  // try {
-  //   const [metas] = await BuscarMetasDelDia(codigo)
+  // !!: Revisar codigo ya que es posible una sql injection en la variable codigo se debe intentar escapar y/o validar sanitizar ...
+  // TODO: por el momento se usara escape de querystring sin emabrgo toca mejorar este aspecto en el futuro
 
-  //   res.status(200).json(metas)
-  // } catch (error) {
-  //   console.error('Error al obtener las metas del día:', error)
-  //   res.status(500).json({ message: 'Hubo un problema al obtener las metas del día. Por favor, inténtalo de ResumenDia más tarde.' })
-  // }
+  try {
+    await MetasProducts.sync()
+    const metaDiaProdc = await MetasProducts.findOne({
+      attributes: ['CHANCE', 'PAGAMAS', 'PAGATODO', 'GANE5', 'PATA_MILLONARIA', 'DOBLECHANCE', 'CHANCE_MILLONARIO'],
+      where: { SUCURSAL: escape(codigo), FECHA: fn('CURDATE') }
+    })
+
+    if (!metaDiaProdc) return res.status(404).json({ message: 'No se encontraron metas para el codigo y fecha proporcionados' })
+  
+    // TODO: mejorar esta logica se podria crear una funcion reutilizable para sumar los productos
+    const sumaProducts = ( 
+      metaDiaProdc.dataValues.CHANCE + metaDiaProdc.dataValues.PAGAMAS + 
+      metaDiaProdc.dataValues.PAGATODO + metaDiaProdc.dataValues.GANE5 + 
+      metaDiaProdc.dataValues.PATA_MILLONARIA + metaDiaProdc.dataValues.DOBLECHANCE + 
+      metaDiaProdc.dataValues.CHANCE_MILLONARIO
+    )
+
+    const ventaActual = await MetasProducts.findOne({
+      attributes: ['PROMEDIO_DIARIO_CHANCE', 'PROMEDIO_DIARIO_PAGAMAS', 'PROMEDIO_DIARIO_PAGATODO', 'PROMEDIO_DIARIO_GANE5', 'PROMEDIO_DIARIO_PATAMI', 'PROMEDIO_DIARIO_DOBLECHANCE', 'PROMEDIO_DIARIO_CHMILL'],
+      where: { SUCURSAL: escape(codigo), FECHA: fn('CURDATE') }
+    })
+
+    const aspiracionDia = (
+      ventaActual?.dataValues.PROMEDIO_DIARIO_CHANCE + ventaActual?.dataValues.PROMEDIO_DIARIO_PAGAMAS + 
+      ventaActual?.dataValues.PROMEDIO_DIARIO_PAGATODO + ventaActual?.dataValues.PROMEDIO_DIARIO_GANE5 + 
+      ventaActual?.dataValues.PROMEDIO_DIARIO_PATAMI + ventaActual?.dataValues.PROMEDIO_DIARIO_DOBLECHANCE + 
+      ventaActual?.dataValues.PROMEDIO_DIARIO_CHMILL
+    )
+
+    const porcentajeCumplimiento = parseFloat(((sumaProducts / aspiracionDia) * 100).toFixed(2))
+    
+    return res.status(200).json({ venta_actual: sumaProducts, aspiracion: aspiracionDia, cumplimiento: porcentajeCumplimiento })
+  } catch (error) {
+    return res.status(500).json({ message: 'Error al obtener las metas', error })
+  }
 }

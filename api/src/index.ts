@@ -3,8 +3,9 @@ import morgan from 'morgan'
 import cors from 'cors'
 import 'dotenv/config'
 
-import { UserRouter } from './routes/user.routes';
 import { infopdvRouter } from './routes/infopdv.routes'
+import { routerMetas } from './routes/metas.routes'
+import { UserRouter } from './routes/user.routes';
 
 const PORT = process.env.PORT || 3030
 const app = express();
@@ -14,8 +15,8 @@ app.use(morgan('dev'))
 app.use(cors())
 
 app.use('/api/v1', UserRouter)
-
 app.use('/api/v1', infopdvRouter)
+app.use('/api/v1', routerMetas)
 
 app.get('/api/v1/dataTime', async (_req, res) => {
   try {
