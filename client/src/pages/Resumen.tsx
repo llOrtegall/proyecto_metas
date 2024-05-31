@@ -1,11 +1,7 @@
-import { User } from '../types/User'
-
-function ResumenPage ({ user }:{user: User}) {
+function ResumenPage () {
   return (
-    <section>
-      <h1>Resumen Aspiración Día</h1>
-      <p>Bienvenido @ {user.nombres}</p>
-      <p>{user.codigo}</p>
+    <section className=''>
+      test
     </section>
   )
 }
