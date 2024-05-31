@@ -7,13 +7,15 @@ import LoginPage from './pages/LoginForm'
 import ResumenPage from './pages/Resumen'
 import AspMesPage from './pages/AspMes'
 import AspDiaPage from './pages/ApsDia'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { PDVINFO } from './types/Pdv'
 
 axios.defaults.baseURL = 'http://localhost:3000/api/v1'
 
 function App () {
   const { user, login, logout } = useAuth()
+  const [pdv, setPdv] = useState<PDVINFO>({ CATEGORIA: '', VERSION: '', DIRECCION: '', NOMBRE: '', SUPERVISOR: '' })
 
   useEffect(() => {
     const token = localStorage.getItem('tokenMetas')
@@ -25,11 +27,25 @@ function App () {
     }
   }, [])
 
+  useEffect(() => {
+    console.log(user.codigo)
+    if (user.codigo !== 0) {
+      axios.post('/infopdv', { codigo: user.codigo })
+        .then((res) => {
+          console.log(res.data)
+          setPdv(res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+  }, [user.codigo])
+
   return (
     <>
       <Routes>
         <Route path='/login' element={<LoginPage />} />
-        <Route element={<ProtectedRoute isAllowed={!!user} />}>
+        <Route element={<ProtectedRoute isAllowed={!!user} pdvInfo={pdv} />}>
           <Route path='/' element={<ResumenPage nombres={user.nombres} codigo={user.codigo} username={user.username} />} />
           <Route path='/aspiracionDia' element={<AspDiaPage />} />
           <Route path='/aspiracionMesActual' element={<AspMesPage />} />
