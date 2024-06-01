@@ -45,7 +45,7 @@ function App () {
   return (
     <>
       <Routes>
-        <Route path='/login' element={<LoginPage />} />
+        <Route path='/login' index element={<LoginPage />} />
         <Route element={<ProtectedRoute isAllowed={!!user} pdvInfo={pdv} />}>
           <Route path='/' element={<ResumenPage nombres={user.nombres} codigo={user.codigo} username={user.username} catergoria={pdv.CATEGORIA} version={pdv.VERSION} />} />
           <Route path='/aspiracionDia' element={<AspDiaPage codigo={user.codigo} zona={pdv.ZONA} />} />

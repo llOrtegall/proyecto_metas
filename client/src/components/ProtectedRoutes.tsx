@@ -16,14 +16,18 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ isAllowed, redirectTo 
   }
 
   return (
-    <>
-      <nav className='w-3/12'>
-        <NavBar />
-      </nav>
-      <main className='w-9/12'>
-        <InfoPdvComponent pdv={pdvInfo} />
-        <Outlet />
-      </main>
-    </>
+    pdvInfo.ZONA
+      ? (
+        <>
+          <nav className='w-3/12'>
+            <NavBar />
+          </nav>
+          <main className='w-9/12 overflow-y-auto'>
+            <InfoPdvComponent pdv={pdvInfo} />
+            <Outlet />
+          </main>
+        </>
+        )
+      : null
   )
 }
