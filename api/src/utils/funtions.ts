@@ -349,9 +349,9 @@ function parsearInfoArrayServired(data: ProductsJamundi) {
 }
 
 export function ReturnProducts (zona: string, metas: ProductsYumbo | ProductsJamundi) {
-  if (zona === '39627') {
+  if (zona === '39628') {
     return parsearInfoArrayMultired(metas as ProductsYumbo)
-  } else if(zona === '39628') {
+  } else if(zona === '39627') {
     return parsearInfoArrayServired(metas as ProductsJamundi)
   }
   throw new Error('Error al parsear la informacion')
