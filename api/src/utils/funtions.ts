@@ -30,8 +30,8 @@ const Multired = [
 ]
 
 export function ReturnAtributesCompany(zona: string) {
-  if (zona === '39628') return Multired
-  if (zona === '39627') return Servired
+  if (zona === '39627') return Multired
+  if (zona === '39628') return Servired
 }
 
 function calcularPorcentaje(actual: number, metaDia: number) {
@@ -349,9 +349,9 @@ function parsearInfoArrayServired(data: ProductsJamundi) {
 }
 
 export function ReturnProducts (zona: string, metas: ProductsYumbo | ProductsJamundi) {
-  if (zona === '39628') {
+  if (zona === '39627') {
     return parsearInfoArrayMultired(metas as ProductsYumbo)
-  } else if(zona === '39627') {
+  } else if(zona === '39628') {
     return parsearInfoArrayServired(metas as ProductsJamundi)
   }
   throw new Error('Error al parsear la informacion')
