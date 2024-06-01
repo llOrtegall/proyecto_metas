@@ -1,8 +1,8 @@
+import { ProductsReturn, ReturnProducts } from '../utils/funtions'
 import { MetasProducts } from '../models/metasproducts.model'
 import { Request, Response } from "express"
 import { escape } from 'querystring'
 import { fn } from "sequelize"
-import { ProductsReturn, parsearInfoArrayMultired } from '../utils/funtions'
 
 export const metasDelDia = async (req: Request, res: Response) => {
   const { codigo } = req.body
@@ -54,7 +54,7 @@ export const cumplimientoDiaProducto = async (req: Request, res: Response) => {
 
   if (!codigo || !zona) return res.status(400).json({ error: 'Falta el código del punto de venta' })
 
-  if(zona !== '39627' && zona !== '39628') return res.status(400).json({ error: 'Zona no encontrada' })
+  if(zona !== '39627' && zona !== '39628') return res.status(400).json({ error: 'Zona invalida ' })
 
   try {
     await MetasProducts.sync()
@@ -63,9 +63,9 @@ export const cumplimientoDiaProducto = async (req: Request, res: Response) => {
       where: { SUCURSAL: escape(codigo as string), FECHA: fn('CURDATE') }
     })
 
-    const metasParsed = parsearInfoArrayMultired(metas?.dataValues)
+    const result = ReturnProducts(zona, metas?.dataValues)
 
-    return res.status(200).json(metasParsed)
+    return res.status(200).json(result)
   } catch (error) {
     return res.status(500).json({ error: 'Hubo un problema al obtener el cumplimiento del día por producto. Por favor, inténtalo de nuevo más tarde.' })
   }
