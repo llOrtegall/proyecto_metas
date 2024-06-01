@@ -29,7 +29,7 @@ const Multired = [
   `${PRN}RECAUDOS`, `${PRN}RECARGAS`, `${PRN}LV`,
 ]
 
-export function ProductsReturn(zona: string) {
+export function ReturnAtributesCompany(zona: string) {
   if (zona === '39628') return Multired
   if (zona === '39627') return Servired
 }

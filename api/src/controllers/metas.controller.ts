@@ -1,4 +1,4 @@
-import { ProductsReturn, ReturnProducts } from '../utils/funtions'
+import { ReturnAtributesCompany, ReturnProducts } from '../utils/funtions'
 import { MetasProducts } from '../models/metasproducts.model'
 import { Request, Response } from "express"
 import { escape } from 'querystring'
@@ -51,15 +51,13 @@ export const metasDelDia = async (req: Request, res: Response) => {
 
 export const cumplimientoDiaProducto = async (req: Request, res: Response) => {
   const { codigo, zona } = req.query
-
   if (!codigo || !zona) return res.status(400).json({ error: 'Falta el código del punto de venta' })
-
   if(zona !== '39627' && zona !== '39628') return res.status(400).json({ error: 'Zona invalida ' })
 
   try {
     await MetasProducts.sync()
     const metas = await MetasProducts.findOne({
-      attributes: ProductsReturn(zona),
+      attributes: ReturnAtributesCompany(zona),
       where: { SUCURSAL: escape(codigo as string), FECHA: fn('CURDATE') }
     })
 
