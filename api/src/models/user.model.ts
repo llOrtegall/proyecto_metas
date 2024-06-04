@@ -1,5 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-import { UserConn } from "../connections/userConn";
+import { MetasConn } from "../connections/metasConn";
 
 class User extends Model { }
 
@@ -28,7 +28,7 @@ User.init({
     allowNull: false
   }
 }, {
-  sequelize: UserConn,
+  sequelize: MetasConn,
   modelName: 'user',
   tableName: 'user',
   timestamps: false

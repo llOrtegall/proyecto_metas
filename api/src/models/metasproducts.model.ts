@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize'
-import { UserConn } from '../connections/userConn'
+import { MetasConn } from '../connections/metasConn'
 
 class MetasProducts extends Model { }
 
@@ -65,7 +65,7 @@ MetasProducts.init({
   META_PROMO2: { type: DataTypes.INTEGER, allowNull: true, defaultValue: 0 },
   VERSION: { type: DataTypes.STRING, allowNull: true }
 }, {
-  sequelize: UserConn,
+  sequelize: MetasConn,
   modelName: 'metasproducts',
   tableName: 'METASPRODUCTOS',
   timestamps: false

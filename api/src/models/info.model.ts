@@ -1,4 +1,4 @@
-import { UserConn } from "../connections/userConn";
+import { MetasConn } from "../connections/metasConn";
 import { Model, DataTypes } from "sequelize";
 
 class InfoPdv extends Model {}
@@ -78,7 +78,7 @@ InfoPdv.init({
     allowNull: true
   }
 }, {
-  sequelize: UserConn,
+  sequelize: MetasConn,
   modelName: 'info_pdv',
   tableName: 'INFORMACION_PUNTOSVENTA',
   timestamps: false
