@@ -1,7 +1,7 @@
-import { ReturnAtributesCompany, ReturnProducts } from '../utils/funtions'
+import { ReturnCompanyAtributesMetProducts, ReturnArrayMetProducts } from '../utils/fnMetasProducts'
+import { ReturnAtributesCompany2, ReturnProducts2 } from '../utils/funtions2'
 import { MetasMesActProd } from '../models/ventaMesActProd.model'
 import { MetasProducts } from '../models/metasproducts.model'
-import { MetasMesMultired, ReturnAtributesCompany2, ReturnProducts2 } from '../utils/funtions2'
 import { Request, Response } from "express"
 import { escape } from 'querystring'
 import { fn } from "sequelize"
@@ -59,11 +59,11 @@ export const cumplimientoDiaProducto = async (req: Request, res: Response) => {
   try {
     await MetasProducts.sync()
     const metas = await MetasProducts.findOne({
-      attributes: ReturnAtributesCompany(zona),
+      attributes: ReturnCompanyAtributesMetProducts(zona),
       where: { SUCURSAL: escape(codigo as string), FECHA: fn('CURDATE') }
     })
 
-    const result = ReturnProducts(zona, metas?.dataValues)
+    const result = ReturnArrayMetProducts(zona, metas?.dataValues)
 
     return res.status(200).json(result)
   } catch (error) {

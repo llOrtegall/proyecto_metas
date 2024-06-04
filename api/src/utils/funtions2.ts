@@ -1,3 +1,4 @@
+import { calcularPorcentaje, calcularPorcentajeSinLimite } from "./funtionsReutilizables"
 import { MesActMultired } from "../types/mesActi"
 
 export const MetasMesMultired = [
@@ -69,16 +70,6 @@ export const MetasMesServired = [
   "EJE_RASPE",
   "VTM_RASPE"
 ] 
-
-function calcularPorcentaje(actual: number, metaDia: number) {
-  const percentage = (actual * 100) / metaDia
-  return Math.min(100, percentage).toFixed(2)
-}
-
-function calcularPorcentajeSinLimite(actual: number, metaDia: number) {
-  const percentage = (actual * 100) / metaDia
-  return percentage.toFixed(2)
-}
 
 function parsearInfoArrayMultired2(data: MesActMultired){
   const ASTRO = {

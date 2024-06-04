@@ -1,48 +1,5 @@
+import { calcularPorcentaje, calcularPorcentajeSinLimite } from './funtionsReutilizables'
 import { ProductsJamundi, ProductsYumbo } from '../types/interfaces'
-
-const PRN = 'PROMEDIO_DIARIO_'
-
-// TODO: productos-metas-promedios de bd
-const Servired = [
-  'CHANCE', 'PAGATODO', 'GANE5', 'PAGATODO_JAMUNDI', 'CHOLADITO', 'DOBLECHANCE', 'CHANCE_MILLONARIO',
-  'ASTRO', 'LOTERIA_FISICA', 'LOTERIA_VIRTUAL', 'BETPLAY', 'GIROS', 'SOAT', 'RECAUDOS', 'RECARGAS', 'PROMO1', 'PROMO2',
-
-  'MT_CHANCE', 'MT_PAGATODO', 'MT_GANE5', 'MT_PAGATODO_JAMUNDI', 'MT_CHOLADITO', 'MT_DOBLECHANCE', 'MT_CHANCE_MILLONARIO',
-  'MT_ASTRO', 'MT_LOTERIA_FISICA', 'MT_LOTERIA_VIRTUAL', 'MT_BETPLAY', 'MT_GIROS', 'MT_SOAT', 'MT_RECAUDOS', 'MT_RECARGAS', 'META_PROMO1', 'META_PROMO2',
-
-  `${PRN}SOAT`, `${PRN}CHANCE`, `${PRN}PAGATODO`, `${PRN}GANE5`, `${PRN}PGTJAMUNDI`,
-  `${PRN}CHOLADITO`, `${PRN}DOBLECHANCE`, `${PRN}CHMILL`, `${PRN}ASTRO`,
-  `${PRN}LV`, `${PRN}LF`, `${PRN}BETPLAY`, `${PRN}GIROS`, `${PRN}RECAUDOS`, `${PRN}RECARGAS`
-]
-
-// TODO: productos-metas-promedios de bd
-const Multired = [
-  'ASTRO', 'CHANCE', 'CHANCE_MILLONARIO', 'DOBLECHANCE', 'PAGAMAS', 'BETPLAY', 'PAGATODO', 'RECARGAS', 'GANE5',
-  'PATA_MILLONARIA', 'LOTERIA_VIRTUAL', 'LOTERIA_FISICA', 'PROMO2', 'SOAT', 'GIROS', 'RECAUDOS',
-
-  'MT_CHANCE', 'MT_PAGAMAS', 'MT_PAGATODO', 'MT_GANE5', 'MT_PATA_MILLONARIA', 'MT_DOBLECHANCE',
-  'MT_CHANCE_MILLONARIO', 'MT_ASTRO', 'MT_LOTERIA_FISICA', 'MT_LOTERIA_VIRTUAL', 'MT_BETPLAY',
-  'MT_GIROS', 'MT_SOAT', 'MT_RECAUDOS', 'MT_RECARGAS', 'META_PROMO2',
-
-  `${PRN}CHANCE`, `${PRN}ASTRO`, `${PRN}PAGAMAS`, `${PRN}PAGATODO`, `${PRN}GANE5`, `${PRN}PATAMI`,
-  `${PRN}DOBLECHANCE`, `${PRN}CHMILL`, `${PRN}LF`, `${PRN}BETPLAY`, `${PRN}GIROS`, `${PRN}SOAT`,
-  `${PRN}RECAUDOS`, `${PRN}RECARGAS`, `${PRN}LV`,
-]
-
-export function ReturnAtributesCompany(zona: string) {
-  if (zona === '39627') return Multired
-  if (zona === '39628') return Servired
-}
-
-function calcularPorcentaje(actual: number, metaDia: number) {
-  const percentage = (actual * 100) / metaDia
-  return Math.min(100, percentage).toFixed(2)
-}
-
-function calcularPorcentajeSinLimite(actual: number, metaDia: number) {
-  const percentage = (actual * 100) / metaDia
-  return percentage.toFixed(2)
-}
 
 function parsearInfoArrayMultired(data: ProductsYumbo) {
   const ASTRO = {
@@ -348,7 +305,37 @@ function parsearInfoArrayServired(data: ProductsJamundi) {
   return[CHANCE, PAGATODO, GANE5, PAGATODO_JAMUNDI, CHOLADITO, DOBLECHANCE, CHANCE_MILLONARIO, ASTRO, LOTERIA_VIRTUAL, LOTERIA_FISICA, BETPLAY, GIROS, SOAT, RECAUDOS, RECARGAS, PROMO1, PROMO2, JUEGOS_AZAR]
 }
 
-export function ReturnProducts (zona: string, metas: ProductsYumbo | ProductsJamundi) {
+const PRN = 'PROMEDIO_DIARIO_'
+const Servired = [
+  'CHANCE', 'PAGATODO', 'GANE5', 'PAGATODO_JAMUNDI', 'CHOLADITO', 'DOBLECHANCE', 'CHANCE_MILLONARIO',
+  'ASTRO', 'LOTERIA_FISICA', 'LOTERIA_VIRTUAL', 'BETPLAY', 'GIROS', 'SOAT', 'RECAUDOS', 'RECARGAS', 'PROMO1', 'PROMO2',
+
+  'MT_CHANCE', 'MT_PAGATODO', 'MT_GANE5', 'MT_PAGATODO_JAMUNDI', 'MT_CHOLADITO', 'MT_DOBLECHANCE', 'MT_CHANCE_MILLONARIO',
+  'MT_ASTRO', 'MT_LOTERIA_FISICA', 'MT_LOTERIA_VIRTUAL', 'MT_BETPLAY', 'MT_GIROS', 'MT_SOAT', 'MT_RECAUDOS', 'MT_RECARGAS', 'META_PROMO1', 'META_PROMO2',
+
+  `${PRN}SOAT`, `${PRN}CHANCE`, `${PRN}PAGATODO`, `${PRN}GANE5`, `${PRN}PGTJAMUNDI`,
+  `${PRN}CHOLADITO`, `${PRN}DOBLECHANCE`, `${PRN}CHMILL`, `${PRN}ASTRO`,
+  `${PRN}LV`, `${PRN}LF`, `${PRN}BETPLAY`, `${PRN}GIROS`, `${PRN}RECAUDOS`, `${PRN}RECARGAS`
+]
+const Multired = [
+  'ASTRO', 'CHANCE', 'CHANCE_MILLONARIO', 'DOBLECHANCE', 'PAGAMAS', 'BETPLAY', 'PAGATODO', 'RECARGAS', 'GANE5',
+  'PATA_MILLONARIA', 'LOTERIA_VIRTUAL', 'LOTERIA_FISICA', 'PROMO2', 'SOAT', 'GIROS', 'RECAUDOS',
+
+  'MT_CHANCE', 'MT_PAGAMAS', 'MT_PAGATODO', 'MT_GANE5', 'MT_PATA_MILLONARIA', 'MT_DOBLECHANCE',
+  'MT_CHANCE_MILLONARIO', 'MT_ASTRO', 'MT_LOTERIA_FISICA', 'MT_LOTERIA_VIRTUAL', 'MT_BETPLAY',
+  'MT_GIROS', 'MT_SOAT', 'MT_RECAUDOS', 'MT_RECARGAS', 'META_PROMO2',
+
+  `${PRN}CHANCE`, `${PRN}ASTRO`, `${PRN}PAGAMAS`, `${PRN}PAGATODO`, `${PRN}GANE5`, `${PRN}PATAMI`,
+  `${PRN}DOBLECHANCE`, `${PRN}CHMILL`, `${PRN}LF`, `${PRN}BETPLAY`, `${PRN}GIROS`, `${PRN}SOAT`,
+  `${PRN}RECAUDOS`, `${PRN}RECARGAS`, `${PRN}LV`,
+]
+
+export function ReturnCompanyAtributesMetProducts(zona: string) {
+  if (zona === '39627') return Multired
+  if (zona === '39628') return Servired
+}
+
+export function ReturnArrayMetProducts (zona: string, metas: ProductsYumbo | ProductsJamundi) {
   if (zona === '39627') {
     return parsearInfoArrayMultired(metas as ProductsYumbo)
   } else if(zona === '39628') {
