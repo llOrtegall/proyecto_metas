@@ -38,6 +38,7 @@ const MetasMesActMultired = [
 
 const MetasMesActServired = [
     "EJE_CHANCE",
+    "VTM_CHANCE",
     "EJE_CHOLADITO",
     "VTM_CHOLADITO",
     "EJE_PAGATODO_JAMUNDI",
