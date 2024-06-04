@@ -101,8 +101,10 @@ export const vtaMesAntPro = async (req: Request, res: Response) => {
   if (!codigo || !zona) return res.status(400).json({ error: 'Falta el código del punto de venta' })
   if (zona !== '39627' && zona !== '39628') return res.status(400).json({ error: 'Zona invalida ' })
 
-  const getMesAnt = new Date().getMonth()
-  
+  // TODO: en la bd el mes 1 es enero, pero en js el mes 0 es enero, por lo que se debe hacer un ajuste para traer el mes anterior
+  let getMesAnt = new Date().getMonth()
+  if(getMesAnt === 0) getMesAnt = 12
+
   try {
     await vtaMesAntCump.sync()
 
@@ -118,90 +120,3 @@ export const vtaMesAntPro = async (req: Request, res: Response) => {
     return res.status(500).json({ error: 'Hubo un problema al obtener el cumplimiento del mes anterior por producto. Por favor, inténtalo de nuevo más tarde.' })
   }
 }
-
-/* 
-// TODO: Mes Anterior Por Producto
-async function CumMesAntProdYumbo (codigo) {
-  const [cumplimiento] = await pool.execute(
-    `
-    select 
-      mp.EJE_CHANCE, mp.VTM_CHANCE,
-      mp.EJE_PAGAMAS, mp.VTM_PAGAMAS, 
-      mp.EJE_PAGATODO, mp.VTM_PAGATODO, 
-      mp.EJE_GANE5, mp.VTM_GANE5, 
-      mp.EJE_PATA_MILLONARIA, mp.VTM_PATA_MILLONARIA, 
-      mp.EJE_DOBLECHANCE, mp.VTM_DOBLECHANCE,
-      mp.EJE_CHANCE_MILLONARIO, mp.VTM_CHANCE_MILLONARIO,  
-      mp.EJE_ASTRO, mp.VTM_ASTRO,
-      mp.EJE_LOTERIA_FISICA, mp.VTM_LOTERIA_FISICA, 
-      mp.EJE_LOTERIA_VIRTUAL, mp.VTM_LOTERIA_VIRTUAL,
-      mp.EJE_BETPLAY, mp.VTM_BETPLAY, 
-      mp.EJE_GIROS, mp.VTM_GIROS, 
-      mp.EJE_SOAT, mp.VTM_SOAT, 
-      mp.EJE_RECAUDOS, mp.VTM_RECAUDOS, 
-      mp.EJE_RECARGAS, mp.VTM_RECARGAS,
-      mp.EJE_RASPE, mp.VTM_RASPE
-    from 
-      HIST_META_ACUMULADO mp, 
-      INFORMACION_PUNTOSVENTA ip 
-    WHERE 
-      mp.SUCURSAL = ${codigo} 
-      and mp.MES=MONTH(DATE_ADD(DATE_ADD(LAST_DAY(NOW()), INTERVAL 1 DAY),INTERVAL -2 MONTH)) 
-      and mp.SUCURSAL=ip.codigo;
-    `
-  )
-
-  return cumplimiento
-}
-
-async function CumMesAntProdJamundi (codigo) {
-  const [cumplimiento] = await pool.execute(
-    `
-    select 
-      mp.EJE_CHANCE, mp.VTM_CHANCE,
-      mp.EJE_CHOLADITO, mp.VTM_CHOLADITO, 
-      mp.EJE_PAGATODO_JAMUNDI, mp.VTM_PAGATODO_JAMUNDI,
-      mp.EJE_GANE5, mp.VTM_GANE5,
-      mp.EJE_PATA_MILLONARIA, mp.VTM_PATA_MILLONARIA,
-      mp.EJE_DOBLECHANCE, mp.VTM_DOBLECHANCE,
-      mp.EJE_CHANCE_MILLONARIO, mp.VTM_CHANCE_MILLONARIO,
-      mp.EJE_ASTRO, mp.VTM_ASTRO,
-      mp.EJE_LOTERIA_FISICA, mp.VTM_LOTERIA_FISICA,
-      mp.EJE_LOTERIA_VIRTUAL, mp.VTM_LOTERIA_VIRTUAL,
-      mp.EJE_BETPLAY, mp.VTM_BETPLAY,
-      mp.EJE_GIROS, mp.VTM_GIROS,
-      mp.EJE_SOAT,mp.VTM_SOAT,
-      mp.EJE_RECAUDOS, mp.VTM_RECAUDOS,
-      mp.EJE_RECARGAS, mp.VTM_RECARGAS,
-      mp.EJE_RASPE, mp.VTM_RASPE
-    from
-      HIST_META_ACUMULADO mp,
-      INFORMACION_PUNTOSVENTA ip
-      WHERE 
-      mp.SUCURSAL = ${codigo} 
-      and mp.MES=MONTH(DATE_ADD(DATE_ADD(LAST_DAY(NOW()), INTERVAL 1 DAY),INTERVAL -2 MONTH)) 
-      and mp.SUCURSAL=ip.codigo;
-    `
-  )
-  return cumplimiento
-}
-
-export const cumplimientoMesAnteriorProducto = async (req, res) => {
-  const { codigo, zona } = req.body
-  let cumplimiento
-  try {
-    if (zona === 39627) {
-      [cumplimiento] = await CumMesAntProdYumbo(codigo)
-      return res.status(200).json(cumplimiento)
-    } else if (zona === 39628) {
-      [cumplimiento] = await CumMesAntProdJamundi(codigo)
-      return res.status(200).json(cumplimiento)
-    } else {
-      return res.status(400).json({ message: 'Zona no encontrada' })
-    }
-  } catch (error) {
-    console.log(error)
-    return res.status(500).json({ message: 'Hubo un problema al obtener el cumplimiento del mes anterior por producto. Por favor, inténtalo de nuevo más tarde.' })
-  }
-}
-*/
