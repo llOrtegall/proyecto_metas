@@ -1,6 +1,7 @@
 import { ReturnAtributesCompany, ReturnProducts } from '../utils/funtions'
 import { MetasMesActProd } from '../models/ventaMesActProd.model'
 import { MetasProducts } from '../models/metasproducts.model'
+import { MetasMesMultired, ReturnAtributesCompany2, ReturnProducts2 } from '../utils/funtions2'
 import { Request, Response } from "express"
 import { escape } from 'querystring'
 import { fn } from "sequelize"
@@ -79,10 +80,13 @@ export const cumplimientoMesActualProducto = async (req: Request, res: Response)
     try {
       await MetasMesActProd.sync()
       const metasMesAct = await MetasMesActProd.findOne({
+        attributes: ReturnAtributesCompany2(zona),
         where: { SUCURSAL: escape(codigo as string), ZONA: escape(zona as string), FECHA: fn('CURDATE') }
       })
 
-      console.log(metasMesAct);
+      const result = ReturnProducts2(zona, metasMesAct?.dataValues)
+
+      return res.status(200).json(result)
     } catch (error) {
       console.log(error);
       return res.status(500).json({ error: 'Hubo un problema al obtener el cumplimiento del mes actual por producto. Por favor, inténtalo de nuevo más tarde.' })

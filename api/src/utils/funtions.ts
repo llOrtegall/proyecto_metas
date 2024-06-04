@@ -1,4 +1,4 @@
-import { IProduct, ProductsJamundi, ProductsYumbo } from '../types/interfaces'
+import { ProductsJamundi, ProductsYumbo } from '../types/interfaces'
 
 const PRN = 'PROMEDIO_DIARIO_'
 
