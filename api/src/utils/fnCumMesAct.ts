@@ -1,7 +1,7 @@
 import { calcularPorcentaje, calcularPorcentajeSinLimite } from "./funtionsReutilizables"
 import { MesActMultired } from "../types/mesActi"
 
-export const MetasMesMultired = [
+const MetasMesActMultired = [
   "EJE_CHANCE",
   "VTM_CHANCE",
   "EJE_PAGAMAS",
@@ -36,7 +36,7 @@ export const MetasMesMultired = [
   "VTM_RASPE"
 ] 
 
-export const MetasMesServired = [
+const MetasMesActServired = [
   "EJE_CHANCE",
   "VTM_CHANCE",
   "EJE_PAGAMAS",
@@ -265,12 +265,12 @@ function parsearInfoArrayMultired2(data: MesActMultired){
   ]
 }
 
-export function ReturnAtributesCompany2(zona: string) {
-  if (zona === '39627') return MetasMesMultired
-  if (zona === '39628') return MetasMesServired
+export function ReturnCompanyAtriCumMesActu(zona: string) {
+  if (zona === '39627') return MetasMesActMultired
+  if (zona === '39628') return MetasMesActServired
 }
 
-export function ReturnProducts2 (zona: string, metas: MesActMultired) {
+export function ReturArrayCumpMesActProducts (zona: string, metas: MesActMultired) {
   if (zona === '39627') {
     return parsearInfoArrayMultired2(metas as MesActMultired)
   }

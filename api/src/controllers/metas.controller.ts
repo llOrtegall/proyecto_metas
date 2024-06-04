@@ -1,5 +1,5 @@
 import { ReturnCompanyAtributesMetProducts, ReturnArrayMetProducts } from '../utils/fnMetasProducts'
-import { ReturnAtributesCompany2, ReturnProducts2 } from '../utils/funtions2'
+import { ReturnCompanyAtriCumMesActu, ReturArrayCumpMesActProducts } from '../utils/fnCumMesAct'
 import { MetasMesActProd } from '../models/ventaMesActProd.model'
 import { MetasProducts } from '../models/metasproducts.model'
 import { Request, Response } from "express"
@@ -80,11 +80,11 @@ export const cumplimientoMesActualProducto = async (req: Request, res: Response)
     try {
       await MetasMesActProd.sync()
       const metasMesAct = await MetasMesActProd.findOne({
-        attributes: ReturnAtributesCompany2(zona),
+        attributes: ReturnCompanyAtriCumMesActu(zona),
         where: { SUCURSAL: escape(codigo as string), ZONA: escape(zona as string), FECHA: fn('CURDATE') }
       })
 
-      const result = ReturnProducts2(zona, metasMesAct?.dataValues)
+      const result = ReturArrayCumpMesActProducts(zona, metasMesAct?.dataValues)
 
       return res.status(200).json(result)
     } catch (error) {
