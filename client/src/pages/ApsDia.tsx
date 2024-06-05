@@ -1,37 +1,10 @@
 import { BarraProgressProduct } from '../components/ui/ProgresoProducto'
+import { useFecthMetasData } from '../hooks/useFetchData'
+import { MetasProps } from '../types/Metas'
 import { ArrowsIcon } from '../components/icons'
-import { MetasProducto } from '../types/Metas'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
 
-interface AspDiaPageProps {
-  codigo: number
-  zona: string
-}
-
-function AspDiaPage ({ codigo, zona }: AspDiaPageProps) {
-  const [metas, setMetas] = useState<MetasProducto[]>([])
-
-  useEffect(() => {
-    axios.get('/cumplimientoDiaProducto', { params: { codigo, zona } })
-      .then(res => setMetas(res.data))
-      .catch(err => console.error(err))
-  }, [])
-
-  const [isAscending, setIsAscending] = useState(false)
-
-  // Verifica que los datos existen antes de intentar ordenarlos
-  const sortedData = Array.isArray(metas)
-    ? [...metas]
-        .sort((a, b) => {
-        // Siempre coloca el elemento con id 'especial' en primer lugar
-          if (a.id === 17) return -1
-          if (b.id === 17) return 1
-
-          // Para todos los demás elementos, ordena por porcentaje
-          return isAscending ? parseFloat(a.porcentaje) - parseFloat(b.porcentaje) : parseFloat(b.porcentaje) - parseFloat(a.porcentaje)
-        })
-    : []
+function AspDiaPage ({ codigo, zona }: MetasProps) {
+  const { sortedData, error, isLoading, setIsAscending, isAscending } = useFecthMetasData('/cumpDiaProd', zona, codigo)
 
   return (
     <section>
@@ -43,14 +16,18 @@ function AspDiaPage ({ codigo, zona }: AspDiaPageProps) {
         </button>
       </section>
       <div className='grid grid-cols-4 gap-2 px-2'>
-        {metas && (
-          sortedData.map(meta => (
-            <BarraProgressProduct
-              key={meta.id} pruducto={meta.producto} ventaActual={meta.ventaActual} aspiracionDia={meta.aspiracionDia}
-              percentage={parseFloat(meta.porcentaje)} percentage2={parseFloat(meta.porcentaje2)}
-            />
-          ))
-        )}
+        {isLoading ? <p>Cargando...</p> : null}
+        {error ? <p>Ocurrió un error al solicitar la data recargue la página o intentelo más tarde</p> : null}
+        {
+          sortedData && (
+            sortedData.map(meta => (
+              <BarraProgressProduct
+                key={meta.id} pruducto={meta.producto} ventaActual={meta.ventaActual} aspiracionDia={meta.aspiracionDia}
+                percentage={parseFloat(meta.porcentaje)} percentage2={parseFloat(meta.porcentaje2)}
+              />
+            ))
+          )
+        }
       </div>
     </section>
 

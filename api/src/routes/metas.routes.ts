@@ -5,7 +5,7 @@ export const routerMetas = Router()
 
 routerMetas.post('/metasDia', metasDelDia)
 
-routerMetas.get('/cumplimientoDiaProducto', cumplimientoDiaProducto)
+routerMetas.get('/cumpDiaProd', cumplimientoDiaProducto)
 
 routerMetas.get('/cumpMesAct', cumplimientoMesActualProducto)
 

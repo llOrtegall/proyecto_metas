@@ -6,3 +6,8 @@ export interface MetasProducto {
   porcentaje: string
   porcentaje2: string
 }
+
+export interface MetasProps {
+  codigo: number
+  zona: string
+}
