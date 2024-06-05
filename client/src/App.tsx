@@ -58,7 +58,7 @@ function App () {
           />
           <Route path='/aspiracionDia' element={<AspDiaPage codigo={user.codigo} zona={pdv.ZONA} />} />
           <Route path='/aspiracionMesActual' element={<AspMesPage codigo={user.codigo} zona={pdv.ZONA} />} />
-          <Route path='/aspiracionMesAnterior' element={<AspMenAntPage />} />
+          <Route path='/aspiracionMesAnterior' element={<AspMenAntPage codigo={user.codigo} zona={pdv.ZONA} />} />
           <Route path='/sugeridos' element={<SugeridosPage />} />
           <Route path='/historial' element={<HistCatPage />} />
         </Route>

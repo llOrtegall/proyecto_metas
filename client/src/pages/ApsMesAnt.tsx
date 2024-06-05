@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 interface ApsMetasProps {
-  codigo: string
+  codigo: number
   zona: string
 }
 
