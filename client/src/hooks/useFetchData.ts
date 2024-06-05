@@ -11,7 +11,7 @@ export function useFecthMetasData (url: string, company: string, codigo: number)
     const fetchData = async () => {
       setIsLoading(true)
       try {
-        const response = await axios.post(url, { company, codigo })
+        const response = await axios.get(url, { params: { zona: company, codigo } })
         setData(response.data)
         setError(null)
       } catch (err) {
@@ -22,6 +22,10 @@ export function useFecthMetasData (url: string, company: string, codigo: number)
     }
 
     fetchData()
+
+    const intervalId = setInterval(fetchData, 5 * 60 * 1000) // Fetch data every 5 minutes
+
+    return () => clearInterval(intervalId) // Clean up on unmount
   }, [url, company, codigo])
 
   return { data, isLoading, error }

@@ -7,8 +7,7 @@ import { sortData } from '../utils/funtions'
 
 function AspDiaPage ({ codigo, zona }: MetasProps) {
   const { data, error, isLoading } = useFecthMetasData('/cumpDiaProd', zona, codigo)
-
-  const [isAscending, setIsAscending] = useState(true)
+  const [isAscending, setIsAscending] = useState(false)
 
   const sortedData = useMemo(() => {
     return Array.isArray(data) ? sortData(data, isAscending) : []
