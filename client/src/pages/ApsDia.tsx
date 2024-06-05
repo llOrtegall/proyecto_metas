@@ -2,9 +2,17 @@ import { BarraProgressProduct } from '../components/ui/ProgresoProducto'
 import { useFecthMetasData } from '../hooks/useFetchData'
 import { MetasProps } from '../types/Metas'
 import { ArrowsIcon } from '../components/icons'
+import { useMemo, useState } from 'react'
+import { sortData } from '../utils/funtions'
 
 function AspDiaPage ({ codigo, zona }: MetasProps) {
-  const { sortedData, error, isLoading, setIsAscending, isAscending } = useFecthMetasData('/cumpDiaProd', zona, codigo)
+  const { data, error, isLoading } = useFecthMetasData('/cumpDiaProd', zona, codigo)
+
+  const [isAscending, setIsAscending] = useState(true)
+
+  const sortedData = useMemo(() => {
+    return Array.isArray(data) ? sortData(data, isAscending) : []
+  }, [data, isAscending])
 
   return (
     <section>
@@ -19,14 +27,12 @@ function AspDiaPage ({ codigo, zona }: MetasProps) {
         {isLoading ? <p>Cargando...</p> : null}
         {error ? <p>Ocurrió un error al solicitar la data recargue la página o intentelo más tarde</p> : null}
         {
-          sortedData && (
             sortedData.map(meta => (
               <BarraProgressProduct
                 key={meta.id} pruducto={meta.producto} ventaActual={meta.ventaActual} aspiracionDia={meta.aspiracionDia}
                 percentage={parseFloat(meta.porcentaje)} percentage2={parseFloat(meta.porcentaje2)}
               />
             ))
-          )
         }
       </div>
     </section>
