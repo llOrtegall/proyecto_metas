@@ -113,7 +113,9 @@ export const vtaMesAntPro = async (req: Request, res: Response) => {
       where: { SUCURSAL: escape(codigo as string), ZONA: escape(zona as string), MES: getMesAnt }
     })
 
-    return res.status(200).json(metasMesAnt)
+    const result = ReturArrayCumpMesActProducts(zona, metasMesAnt?.dataValues)
+
+    return res.status(200).json(result)
 
   } catch (error) {
     console.log(error);
