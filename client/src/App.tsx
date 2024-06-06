@@ -41,7 +41,6 @@ function App () {
     }
   }, [user.codigo])
 
-  console.log(pdv)
   return (
     <>
       <Routes>

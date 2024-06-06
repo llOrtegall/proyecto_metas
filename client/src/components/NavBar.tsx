@@ -22,7 +22,7 @@ export function NavBar () {
     <ul className='flex flex-col h-screen items-center justify-around'>
       <LogoImage zona={39627} key={39627} />
 
-      <li className='flex flex-col gap-4 font-semibold dark:text-white'>
+      <li className='flex flex-col gap-4 2xl:gap-6 3xl:gap-8 font-semibold dark:text-white'>
         {navLinks.map(link => <NavLinkItem key={link.id} path={link.path} icon={link.icon} label={link.label} />)}
       </li>
 

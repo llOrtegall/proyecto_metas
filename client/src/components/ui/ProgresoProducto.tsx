@@ -17,7 +17,7 @@ export function BarraProgressProduct ({ pruducto, ventaActual, aspiracionDia, pe
   const progressColor = determineProgressColor(percentage)
 
   return (
-    <Card className={`mx-auto bg-${progressColor}-100 text-sm flex flex-col gap-2 dark:text-white`}>
+    <Card className={`mx-auto bg-${progressColor}-100 text-sm flex flex-col gap-2 dark:text-white shadow-md`}>
 
       <h2 className='flex justify-between'>
         <span className='font-bold'>{pruducto}</span>
