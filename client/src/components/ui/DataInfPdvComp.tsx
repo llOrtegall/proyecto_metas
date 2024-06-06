@@ -18,14 +18,14 @@ export function DataInfSucursal ({ pdv: { NOMBRE, SUPERVISOR } }: DataInfPdvProp
   return (
     <>
       <article className='flex items-center justify-center text-center border py-1 rounded-md bg-slate-300 dark:bg-slate-900 font-semibold'>
-        <div className='text-xs lg:text-sm 2xl:text-xl'>Fecha: {fecha || <Loading />}</div>
+        <div className=''>Fecha: {fecha || <Loading />}</div>
       </article>
       <article className='flex items-center justify-center text-center border py-1 rounded-md bg-slate-300 dark:bg-slate-900 font-semibold'>
         <SimularReloj />
       </article>
       <article className='flex items-center justify-center text-center border py-1 rounded-md bg-slate-300 dark:bg-slate-900 font-semibold gap-4'>
-        <div className='text-xs lg:text-sm 2xl:text-xl overflow-hidden overflow-ellipsis whitespace-nowrap'>{NOMBRE || <Loading />}</div>
-        <div className='text-xs lg:text-sm 2xl:text-xl overflow-hidden overflow-ellipsis whitespace-nowrap'>{SUPERVISOR || <Loading />}</div>
+        <div className=' overflow-hidden overflow-ellipsis whitespace-nowrap'>{NOMBRE || <Loading />}</div>
+        <div className=' overflow-hidden overflow-ellipsis whitespace-nowrap'>{SUPERVISOR || <Loading />}</div>
       </article>
     </>
   )

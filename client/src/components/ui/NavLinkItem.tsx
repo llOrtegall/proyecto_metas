@@ -9,8 +9,8 @@ interface NavLinkItemProps {
 
 export const NavLinkItem = ({ icon, label, path }: NavLinkItemProps) => {
   const IconComponent = icon
-  const styles = 'flex items-center gap-3 2xl:text-xl'
-  const stylesSelected = 'flex items-center gap-3 text-blue-700 dark:text-yellow-500 2xl:text-xl'
+  const styles = 'flex items-center gap-3 text-xs lg:text-sm lg:text-xl 2xl:text-2xl '
+  const stylesSelected = 'flex items-center gap-3 text-blue-700 dark:text-yellow-500 text-xs lg:text-sm lg:text-xl 2xl:text-2xl '
 
   return (
     <NavLink className={({ isActive }) => isActive ? `${stylesSelected}` : `${styles}`} to={path}>

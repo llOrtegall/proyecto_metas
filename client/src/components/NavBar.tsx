@@ -10,7 +10,7 @@ const navLinks = [
   { id: 2, path: '/aspiracionDia', icon: SunIcon, label: 'Aspiración Del Día' },
   { id: 3, path: '/aspiracionMesActual', icon: CalendarIcon, label: 'Aspiración Mes Actual' },
   { id: 4, path: '/aspiracionMesAnterior', icon: CalendarAntIcon, label: 'Aspiración Mes Anterior' },
-  { id: 5, path: '/historial', icon: CategoriaIcon, label: 'Historial Categorias' },
+  { id: 5, path: '/historial', icon: CategoriaIcon, label: 'Historial Categorías' },
   { id: 6, path: '/sugeridos', icon: DocsIcon, label: 'Sugeridos' }
 ]
 

@@ -45,6 +45,6 @@ export function SimularReloj () {
   }, [hora])
 
   return (
-    <div className='text-xs lg:text-sm 2xl:text-xl'> Hora: {hora || <Loading />}</div>
+    <div className=''> Hora: {hora || <Loading />}</div>
   )
 }

@@ -14,9 +14,9 @@ function AspDiaPage ({ codigo, zona }: MetasProps) {
   }, [data, isAscending])
 
   return (
-    <section className=''>
+    <section className='px-1'>
       <HeaderComponent setIsAscending={setIsAscending} isLoading={isLoading} isAscending={isAscending} text='Día Actual' />
-      <article className='grid grid-cols-2 gap-2'>
+      <article className='grid grid-cols-2 gap-2 px-1 2xl:grid-cols-3 3xl:grid-cols-4'>
         {
             sortedData.map(meta => (
               <BarraProgressProduct
