@@ -6,7 +6,7 @@ import { MetasProps } from '../types/Metas'
 import { useMemo, useState } from 'react'
 
 function AspMenAntPage ({ codigo, zona }: MetasProps) {
-  const { data } = useFecthMetasData('/cumpDiaProd', zona, codigo)
+  const { data } = useFecthMetasData('/cumpMesAnt', zona, codigo)
   const [isAscending, setIsAscending] = useState(false)
 
   const sortedData = useMemo(() => {
