@@ -6,7 +6,7 @@ import { useMemo, useState } from 'react'
 import { HeaderComponent } from '../components/ui/headerComponent'
 
 function AspDiaPage ({ codigo, zona }: MetasProps) {
-  const { data, error, isLoading } = useFecthMetasData('/cumpDiaProd', zona, codigo)
+  const { data, isLoading } = useFecthMetasData('/cumpDiaProd', zona, codigo)
   const [isAscending, setIsAscending] = useState(false)
 
   const sortedData = useMemo(() => {
@@ -14,10 +14,9 @@ function AspDiaPage ({ codigo, zona }: MetasProps) {
   }, [data, isAscending])
 
   return (
-    <section className='relative'>
+    <section className=''>
       <HeaderComponent setIsAscending={setIsAscending} isLoading={isLoading} isAscending={isAscending} text='Día Actual' />
-      <article className='grid grid-cols-4 gap-2 px-2'>
-        {error ? <p>Ocurrió un error al solicitar la data recargue la página o intentelo más tarde</p> : null}
+      <article className='grid grid-cols-2 gap-2'>
         {
             sortedData.map(meta => (
               <BarraProgressProduct
