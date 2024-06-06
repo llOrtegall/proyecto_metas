@@ -11,6 +11,7 @@ interface HeaderComponentProps {
 export function HeaderComponent ({ setIsAscending, isLoading, isAscending, text }: HeaderComponentProps) {
   return (
     <header className='w-full flex items-center justify-center gap-10 py-2 relative'>
+      {isLoading ? <Loading /> : null}
       <h1 className='text-lg font-semibold'>Aspiración {text}</h1>
       <button
         onClick={() => setIsAscending(!isAscending)}
@@ -19,9 +20,6 @@ export function HeaderComponent ({ setIsAscending, isLoading, isAscending, text 
         <p className='text-center'>Cambiar Orden</p>
         <ArrowsIcon />
       </button>
-
-      {isLoading ? <Loading /> : null}
-
     </header>
   )
 }
