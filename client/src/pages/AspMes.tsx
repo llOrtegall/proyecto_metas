@@ -6,7 +6,7 @@ import { useMemo, useState } from 'react'
 import { HeaderComponent } from '../components/ui/headerComponent'
 
 function AspMesPage ({ codigo, zona }: MetasProps) {
-  const { data } = useFecthMetasData('/cumpMesAct', zona, codigo)
+  const { data, isLoading } = useFecthMetasData('/cumpMesAct', zona, codigo)
   const [isAscending, setIsAscending] = useState(false)
 
   const sortedData = useMemo(() => {
@@ -14,9 +14,9 @@ function AspMesPage ({ codigo, zona }: MetasProps) {
   }, [data, isAscending])
 
   return (
-    <div>
-      <HeaderComponent setIsAscending={setIsAscending} isAscending={isAscending} isLoading={isAscending} text='Mes Actual' />
-      <div className='grid grid-cols-4 gap-2 px-2'>
+    <main className='relative'>
+      <HeaderComponent setIsAscending={setIsAscending} isAscending={isAscending} isLoading={isLoading} text='Mes Actual' />
+      <section className='grid grid-cols-4 gap-2 px-2'>
         {data && (
           sortedData.map(meta => (
             <BarraProgressProduct
@@ -25,8 +25,8 @@ function AspMesPage ({ codigo, zona }: MetasProps) {
             />
           ))
         )}
-      </div>
-    </div>
+      </section>
+    </main>
   )
 }
 
