@@ -1,12 +1,12 @@
 import { BarraProgressProduct } from '../components/ui/ProgresoProducto'
+import { HeaderComponent } from '../components/ui/headerComponent'
 import { useFecthMetasData } from '../hooks/useFetchData'
-import { ObtenerMes, sortData } from '../utils/funtions'
-import { ArrowsIcon } from '../components/icons'
+import { sortData } from '../utils/funtions'
 import { MetasProps } from '../types/Metas'
 import { useMemo, useState } from 'react'
 
 function AspMenAntPage ({ codigo, zona }: MetasProps) {
-  const { data } = useFecthMetasData('/cumpMesAnt', zona, codigo)
+  const { data, isLoading } = useFecthMetasData('/cumpMesAnt', zona, codigo)
   const [isAscending, setIsAscending] = useState(false)
 
   const sortedData = useMemo(() => {
@@ -15,17 +15,7 @@ function AspMenAntPage ({ codigo, zona }: MetasProps) {
 
   return (
     <div>
-      <section className='w-full flex items-center justify-center gap-10'>
-        <h1 className='text-2xl font-semibold '>Aspiración Mes Actual: {ObtenerMes().toUpperCase()}</h1>
-        <button
-          onClick={() => setIsAscending(!isAscending)}
-          className='flex p-3 items-center justify-center bg-blue-600 text-lg rounded-md gap-4 text-white font-semibold hover:bg-blue-500'
-        >
-          <p className='text-center'>Cambiar Orden</p>
-          <ArrowsIcon />
-        </button>
-      </section>
-
+      <HeaderComponent setIsAscending={setIsAscending} isAscending={isAscending} isLoading={isLoading} />
       <div className='grid grid-cols-4 gap-2 px-2'>
         {data && (
           sortedData.map(meta => (
