@@ -8,6 +8,11 @@ export const determineProgressColor = (porcentaje: number) => {
   return 'gray'
 }
 
+export const ObtenerMes = () => {
+  const fecha = new Date()
+  return fecha.toLocaleString('es-ES', { month: 'long' })
+}
+
 export function sortData (data: MetasProducto[], isAscending: boolean): MetasProducto[] {
   return [...data].sort((a, b) => {
     // Siempre coloca el elemento con id 'especial' en primer lugar

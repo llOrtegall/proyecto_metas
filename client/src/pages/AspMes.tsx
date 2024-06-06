@@ -1,40 +1,17 @@
 import { BarraProgressProduct } from '../components/ui/ProgresoProducto'
+import { useFecthMetasData } from '../hooks/useFetchData'
+import { ObtenerMes, sortData } from '../utils/funtions'
 import { ArrowsIcon } from '../components/icons'
-import { MetasProducto } from '../types/Metas'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { MetasProps } from '../types/Metas'
+import { useMemo, useState } from 'react'
 
-interface AspMesActualProps {
-  codigo: number
-  zona: string
-}
-
-const ObtenerMes = () => {
-  const fecha = new Date()
-  return fecha.toLocaleString('es-ES', { month: 'long' })
-}
-
-function AspMesPage ({ codigo, zona }: AspMesActualProps) {
-  const [data, setData] = useState<MetasProducto[]>([])
+function AspMesPage ({ codigo, zona }: MetasProps) {
+  const { data } = useFecthMetasData('/cumpMesAct', zona, codigo)
   const [isAscending, setIsAscending] = useState(false)
 
-  const sortedData = Array.isArray(data)
-    ? [...data]
-        .sort((a, b) => {
-          // Siempre coloca el elemento con id 'especial' en primer lugar
-          if (a.id === 17) return -1
-          if (b.id === 17) return 1
-
-          // Para todos los demás elementos, ordena por porcentaje
-          return isAscending ? parseFloat(a.porcentaje) - parseFloat(b.porcentaje) : parseFloat(b.porcentaje) - parseFloat(a.porcentaje)
-        })
-    : []
-
-  useEffect(() => {
-    axios.get('/cumpMesAct', { params: { codigo, zona } })
-      .then(res => setData(res.data))
-      .catch(err => console.error(err))
-  }, [])
+  const sortedData = useMemo(() => {
+    return Array.isArray(data) ? sortData(data, isAscending) : []
+  }, [data, isAscending])
 
   return (
     <div>
