@@ -19,7 +19,7 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ isAllowed, redirectTo 
     pdvInfo.ZONA
       ? (
         <>
-          <nav className='w-3/12'>
+          <nav className='w-3/12 bg-slate-200 dark:bg-slate-900'>
             <NavBar />
           </nav>
           <main className='w-9/12 overflow-y-auto'>

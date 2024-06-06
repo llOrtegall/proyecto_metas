@@ -22,20 +22,21 @@ export function NavBar () {
     <ul className='flex flex-col h-screen items-center justify-around'>
       <LogoImage zona={39627} key={39627} />
 
-      <li className='flex flex-col gap-4 font-semibold'>
+      <li className='flex flex-col gap-4 font-semibold dark:text-white'>
         {navLinks.map(link => <NavLinkItem key={link.id} path={link.path} icon={link.icon} label={link.label} />)}
       </li>
 
-      <li className=''>
-        <section className=''>
-          <Switch id='switch' name='switch' checked={darkMode} onChange={toggleTheme} className='w-full' />
+      <li className='flex flex-col items-center gap-4'>
+        <section className={`flex items-center gap-2 px-4 py-2 ${darkMode ? 'bg-slate-200' : 'bg-slate-600 '} rounded-md`}>
+          {darkMode ? <p className='text-white font-semibold dark:text-black'>Cambiar Modo Claro</p> : <p className='text-white font-semibold dark:text-black'>Cambiar Modo Oscuro</p>}
+          <Switch id='switch' name='switch' checked={darkMode} onChange={toggleTheme} className='pt-2' />
         </section>
 
-        <button className='' onClick={logout}>
+        <button className='p-2  rounded-md font-semibold bg-blue-700 text-white hover:bg-green-600 transition-all' onClick={logout}>
           Cerrar Sesión
         </button>
 
-        <p className=''>La sesión se cerrará automáticamente cada 2 horas por seguridad</p>
+        <p className='text-sm text-center dark:text-white'>La sesión se cerrará automáticamente cada 2 horas por seguridad</p>
       </li>
     </ul>
   )
