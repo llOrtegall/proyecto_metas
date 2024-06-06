@@ -5,12 +5,13 @@ interface HeaderComponentProps {
   setIsAscending: (value: boolean) => void
   isLoading: boolean
   isAscending: boolean
+  text: string
 }
 
-export function HeaderComponent ({ setIsAscending, isLoading, isAscending }: HeaderComponentProps) {
+export function HeaderComponent ({ setIsAscending, isLoading, isAscending, text }: HeaderComponentProps) {
   return (
     <section className='w-full flex items-center justify-center gap-10 py-4'>
-      <h1 className='text-2xl font-semibold'>Aspiración Día Actual</h1>
+      <h1 className='text-2xl font-semibold'>Aspiración {text}</h1>
       <button onClick={() => setIsAscending(!isAscending)} className='flex p-3 items-center justify-center bg-blue-600 text-lg rounded-md gap-4 text-white font-semibold hover:bg-blue-500'>
         <p className='text-center'>Cambiar Orden</p>
         <ArrowsIcon />

@@ -15,7 +15,7 @@ function AspDiaPage ({ codigo, zona }: MetasProps) {
 
   return (
     <section className='relative'>
-      <HeaderComponent setIsAscending={setIsAscending} isLoading={isLoading} isAscending={isAscending} />
+      <HeaderComponent setIsAscending={setIsAscending} isLoading={isLoading} isAscending={isAscending} text='Día Actual' />
       <div className='grid grid-cols-4 gap-2 px-2'>
         {error ? <p>Ocurrió un error al solicitar la data recargue la página o intentelo más tarde</p> : null}
         {

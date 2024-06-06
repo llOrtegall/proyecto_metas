@@ -15,7 +15,7 @@ function AspMenAntPage ({ codigo, zona }: MetasProps) {
 
   return (
     <div>
-      <HeaderComponent setIsAscending={setIsAscending} isAscending={isAscending} isLoading={isLoading} />
+      <HeaderComponent setIsAscending={setIsAscending} isAscending={isAscending} isLoading={isLoading} text='Mes Anterior' />
       <div className='grid grid-cols-4 gap-2 px-2'>
         {data && (
           sortedData.map(meta => (
