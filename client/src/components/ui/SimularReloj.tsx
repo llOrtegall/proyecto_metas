@@ -3,7 +3,7 @@ import { Loading } from '../animations/Loading'
 import { useEffect, useState } from 'react'
 
 const ONE_SECOND_IN_MS = 1000
-const FIVE_MINUTES_IN_MS = 5 * 60 * 1000
+const TEN_MINUTES_IN_MS = 10 * 60 * 1000
 
 export function SimularReloj () {
   const [hora, setHora] = useState<string>('')
@@ -15,7 +15,7 @@ export function SimularReloj () {
     }
 
     fetchTime()
-    const fetchIntervalId = setInterval(fetchTime, FIVE_MINUTES_IN_MS)
+    const fetchIntervalId = setInterval(fetchTime, TEN_MINUTES_IN_MS)
 
     return () => {
       clearInterval(fetchIntervalId)
