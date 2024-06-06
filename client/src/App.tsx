@@ -47,15 +47,7 @@ function App () {
       <Routes>
         <Route path='/login' index element={<LoginPage />} />
         <Route element={<ProtectedRoute isAllowed={!!user} pdvInfo={pdv} />}>
-          <Route
-            path='/' element={
-              <ResumenPage
-                nombres={user.nombres} codigo={user.codigo}
-                username={user.username} catergoria={pdv.CATEGORIA}
-                version={pdv.VERSION}
-              />
-            }
-          />
+          <Route path='/' element={<ResumenPage nombres={user.nombres} codigo={user.codigo} username={user.username} catergoria={pdv.CATEGORIA} version={pdv.VERSION} />} />
           <Route path='/aspiracionDia' element={<AspDiaPage codigo={user.codigo} zona={pdv.ZONA} />} />
           <Route path='/aspiracionMesActual' element={<AspMesPage codigo={user.codigo} zona={pdv.ZONA} />} />
           <Route path='/aspiracionMesAnterior' element={<AspMenAntPage codigo={user.codigo} zona={pdv.ZONA} />} />

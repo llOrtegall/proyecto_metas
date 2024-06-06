@@ -14,9 +14,9 @@ function AspDiaPage ({ codigo, zona }: MetasProps) {
   }, [data, isAscending])
 
   return (
-    <main className='relative'>
+    <section className='relative'>
       <HeaderComponent setIsAscending={setIsAscending} isLoading={isLoading} isAscending={isAscending} text='Día Actual' />
-      <section className='grid grid-cols-4 gap-2 px-2'>
+      <article className='grid grid-cols-4 gap-2 px-2'>
         {error ? <p>Ocurrió un error al solicitar la data recargue la página o intentelo más tarde</p> : null}
         {
             sortedData.map(meta => (
@@ -26,8 +26,8 @@ function AspDiaPage ({ codigo, zona }: MetasProps) {
               />
             ))
         }
-      </section>
-    </main>
+      </article>
+    </section>
 
   )
 }

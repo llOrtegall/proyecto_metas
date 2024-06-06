@@ -14,9 +14,9 @@ function AspMesPage ({ codigo, zona }: MetasProps) {
   }, [data, isAscending])
 
   return (
-    <main className='relative'>
+    <section className='relative'>
       <HeaderComponent setIsAscending={setIsAscending} isAscending={isAscending} isLoading={isLoading} text='Mes Actual' />
-      <section className='grid grid-cols-4 gap-2 px-2'>
+      <article className='grid grid-cols-4 gap-2 px-2'>
         {data && (
           sortedData.map(meta => (
             <BarraProgressProduct
@@ -25,8 +25,8 @@ function AspMesPage ({ codigo, zona }: MetasProps) {
             />
           ))
         )}
-      </section>
-    </main>
+      </article>
+    </section>
   )
 }
 
