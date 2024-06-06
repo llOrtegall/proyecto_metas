@@ -9,7 +9,7 @@ interface NavLinkItemProps {
 
 export const NavLinkItem = ({ icon, label, path }: NavLinkItemProps) => {
   const IconComponent = icon
-  const styles = 'flex items-center gap-3 text-slate-900 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-300'
+  const styles = 'flex items-center gap-3'
   const stylesSelected = 'flex items-center gap-3 text-blue-700'
 
   return (
