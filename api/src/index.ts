@@ -6,6 +6,7 @@ import 'dotenv/config'
 import { infopdvRouter } from './routes/infopdv.routes'
 import { routerMetas } from './routes/metas.routes'
 import { UserRouter } from './routes/user.routes';
+import { RouteHist } from './routes/hist.routes'
 
 const PORT = process.env.PORT || 3030
 const app = express();
@@ -17,6 +18,7 @@ app.use(cors())
 app.use('/api/v1', UserRouter)
 app.use('/api/v1', infopdvRouter)
 app.use('/api/v1', routerMetas)
+app.use('/api/v1', RouteHist)
 
 app.get('/api/v1/dataTime', async (_req, res) => {
   try {
