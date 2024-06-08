@@ -35,6 +35,7 @@ export async function HistCat(req: Request, res: Response) {
   try {
     await HistModel.sync()
     const historial = await HistModel.findAll({
+      attributes: ['ANHO', 'MES', 'CATEGORIA', 'VERSION'],
       where: { SUCURSAL: escape(codigo as string) }
     })
 
