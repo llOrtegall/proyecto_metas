@@ -55,15 +55,14 @@ export const metasDelDia = async (req: Request, res: Response) => {
 }
 
 export const cumplimientoDiaProducto = async (req: Request, res: Response) => {
-  console.log(req.query) 
   const { codigo, zona } = req.query
   if (!codigo || !zona) return res.status(400).json({ error: 'Falta el código del punto de venta' })
   if (zona !== '39627' && zona !== '39628') return res.status(400).json({ error: 'Zona invalida ' })
 
   try {
-    await MetasProducts.sync()
+    await MetasProducts.sync() // SINCRONIZA MODELO
     const metas = await MetasProducts.findOne({
-      attributes: ReturnCompanyAtributesMetProducts(zona),
+      attributes: ReturnCompanyAtributesMetProducts(zona), // select * {} 
       where: { SUCURSAL: escape(codigo as string), FECHA: fn('CURDATE') }
     })
 
