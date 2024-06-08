@@ -19,3 +19,9 @@ export function HistComponent ({ data }:{data: Historial[]}) {
     </article>
   )
 }
+
+export function TitleComponent ({ textStr }: {textStr: string}) {
+  return (
+    <h1 className='bg-slate-300 p-2 rounded-md font-semibold text-center text-xl lg:text-sm 2xl:text-xl 3xl:text-2xl'>{textStr}</h1>
+  )
+}

@@ -1,4 +1,4 @@
-import { HistComponent } from '../components/HistoCatComp'
+import { HistComponent, TitleComponent } from '../components/HistoCatComp'
 import { Historial } from '../types/interfaces'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -22,12 +22,12 @@ function HistCatPage ({ codigo }: { codigo: number }) {
     <section className='flex gap-2 mx-1'>
 
       <section className='w-6/12 border border-slate-300 rounded-md'>
-        <h1 className='bg-slate-300 p-2 rounded-md font-semibold text-center text-xl lg:text-sm 2xl:text-xl 3xl:text-2xl'>Año Anterior: {annoAnterior}</h1>
+        <TitleComponent textStr={`Histórico Categorías ${annoAnterior}`} />
         <HistComponent data={historialAnterior} />
       </section>
 
       <section className='w-6/12 border border-slate-300 rounded-md'>
-        <h1 className='bg-slate-300 p-2 rounded-md font-semibold text-center text-xl lg:text-sm 2xl:text-xl 3xl:text-2xl'>Año Actual: {annoActual}</h1>
+        <TitleComponent textStr={`Histórico Categorías ${annoActual}`} />
         <HistComponent data={historialActual} />
       </section>
     </section>
