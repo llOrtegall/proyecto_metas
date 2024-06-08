@@ -11,3 +11,10 @@ export interface InterfaceAuthContext {
 export interface AuthProviderProps {
   children: React.ReactNode
 }
+
+export interface Historial {
+  ANHO: number
+  MES: number
+  CATEGORIA: string
+  VERSION: string
+}
