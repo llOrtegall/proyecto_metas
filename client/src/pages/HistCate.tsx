@@ -1,28 +1,65 @@
-import axios from 'axios'
+import { RenderCategoria } from '../components/ui/RenderCategoria'
 import { useEffect, useState } from 'react'
+import axios from 'axios'
+
+interface Historial {
+  ANHO: number
+  MES: number
+  CATEGORIA: string
+  VERSION: string
+}
 
 function HistCatPage ({ codigo }: { codigo: number }) {
-  const [historial, setHistorial] = useState([])
+  const [historial, setHistorial] = useState<Historial[]>([])
 
   useEffect(() => {
-    axios.get(`/historial?codigo=${codigo}`)
-      .then(res => {
-        setHistorial(res.data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    axios.get('/historial', { params: { codigo } })
+      .then(res => { setHistorial(res.data) })
+      .catch(err => { console.log(err) })
   }, [codigo])
 
-  console.log(historial)
+  const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+  const annoActual = new Date().getFullYear()
+  const annoAnterior = annoActual - 1
+
+  const historialActual = historial.filter(hist => hist.ANHO === annoActual)
+  const historialAnterior = historial.filter(hist => hist.ANHO === annoAnterior)
+
   return (
-    <section className='flex w-full p-2'>
-      <div className='w-1/2 p-2'>
-        <h2 className='text-center font-semibold text-xl 2xl:text-2xl xl:grid-cols-2 pb-2'>Año Actual</h2>
-        <ul className='grid grid-cols-1 xl:grid-cols-2 '>
-          test demo
-        </ul>
-      </div>
+    <section className='flex items-center justify-around'>
+
+      <section className='flex flex-col items-center'>
+        <h1 className='py-2 bg-blue-200 px-2 rounded-lg text-2xl font-semibold'>Año Anterior: {annoAnterior}</h1>
+        <article className='grid grid-cols-3 gap-12'>
+          {
+            historialAnterior.map(hist => (
+              <ul key={hist.MES} className=''>
+                <p className='text-center py-1 font-semibold text-lg'>{meses[hist.MES - 1]}</p>
+                <figure className='w-32'>
+                  <RenderCategoria cat={hist.CATEGORIA} ver={hist.VERSION} />
+                </figure>
+              </ul>
+            ))
+          }
+        </article>
+
+      </section>
+
+      <section className='flex flex-col items-center'>
+        <h1 className='py-2 bg-blue-200 px-2 rounded-lg text-2xl font-semibold'>Año Anterior: {annoActual}</h1>
+        <article className='grid grid-cols-3 gap-12'>
+          {
+            historialActual.map(hist => (
+              <ul key={hist.MES} className=''>
+                <p className='text-center py-1 font-semibold text-lg'>{meses[hist.MES - 1]}</p>
+                <figure className='w-32'>
+                  <RenderCategoria cat={hist.CATEGORIA} ver={hist.VERSION} />
+                </figure>
+              </ul>
+            ))
+          }
+        </article>
+      </section>
     </section>
   )
 }
