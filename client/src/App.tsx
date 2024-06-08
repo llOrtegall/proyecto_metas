@@ -51,7 +51,7 @@ function App () {
           <Route path='/aspiracionMesActual' element={<AspMesPage codigo={user.codigo} zona={pdv.ZONA} />} />
           <Route path='/aspiracionMesAnterior' element={<AspMenAntPage codigo={user.codigo} zona={pdv.ZONA} />} />
           <Route path='/sugeridos' element={<SugeridosPage />} />
-          <Route path='/historial' element={<HistCatPage />} />
+          <Route path='/historial' element={<HistCatPage codigo={user.codigo} />} />
         </Route>
       </Routes>
     </>
