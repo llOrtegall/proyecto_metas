@@ -122,3 +122,4 @@ export const vtaMesAntPro = async (req: Request, res: Response) => {
     return res.status(500).json({ error: 'Hubo un problema al obtener el cumplimiento del mes anterior por producto. Por favor, inténtalo de nuevo más tarde.' })
   }
 }
+
