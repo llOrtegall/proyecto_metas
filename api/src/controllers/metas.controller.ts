@@ -8,6 +8,7 @@ import { MetasProducts } from '../models/metasproducts.model'
 import { Request, Response } from "express"
 import { escape } from 'querystring'
 import { fn } from "sequelize"
+import { calcularPorcentaje } from '../utils/funtionsReutilizables'
 
 export const metasDelDia = async (req: Request, res: Response) => {
   const { codigo } = req.body
@@ -46,7 +47,7 @@ export const metasDelDia = async (req: Request, res: Response) => {
       ventaActual?.dataValues.PROMEDIO_DIARIO_CHMILL
     )
 
-    const porcentajeCumplimiento = parseFloat(((sumaProducts / aspiracionDia) * 100).toFixed(2))
+    const porcentajeCumplimiento = calcularPorcentaje(sumaProducts, aspiracionDia)
 
     return res.status(200).json({ venta_actual: sumaProducts, aspiracion: aspiracionDia, cumplimiento: porcentajeCumplimiento })
   } catch (error) {
