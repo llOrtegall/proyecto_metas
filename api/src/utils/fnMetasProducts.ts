@@ -277,14 +277,6 @@ function parsearInfoArrayServired(data: ProductsJamundi) {
     porcentaje: calcularPorcentaje(data.PROMO1, data.META_PROMO1),
     porcentaje2: calcularPorcentajeSinLimite(data.PROMO1, data.META_PROMO1)
   }
-  const PROMO2 = {
-    id: 17,
-    producto: 'Promo 2',
-    ventaActual: data.PROMO2,
-    aspiracionDia: data.META_PROMO2,
-    porcentaje: calcularPorcentaje(data.PROMO2, data.META_PROMO2),
-    porcentaje2: calcularPorcentajeSinLimite(data.PROMO2, data.META_PROMO2)
-  }
 
   let ventaActualAzarCal = 0; 
   let aspiracionDiaAzarCal = 0;
@@ -294,12 +286,21 @@ function parsearInfoArrayServired(data: ProductsJamundi) {
   aspiracionDiaAzarCal = data.PROMEDIO_DIARIO_CHANCE + data.PROMEDIO_DIARIO_CHOLADITO + data.PROMEDIO_DIARIO_PGTJAMUNDI + data.PROMEDIO_DIARIO_GANE5 + data.PROMEDIO_DIARIO_DOBLECHANCE + data.PROMEDIO_DIARIO_CHMILL;
 
   const JUEGOS_AZAR = {
-    id: 18,
+    id: 17,
     producto: 'Venta Total Chance',
     ventaActual: ventaActualAzarCal,
     aspiracionDia: aspiracionDiaAzarCal,
     porcentaje: calcularPorcentaje(ventaActualAzarCal, aspiracionDiaAzarCal),
     porcentaje2: calcularPorcentajeSinLimite(ventaActualAzarCal, aspiracionDiaAzarCal)
+  }
+
+  const PROMO2 = {
+    id: 18,
+    producto: 'Promo 2',
+    ventaActual: data.PROMO2,
+    aspiracionDia: data.META_PROMO2,
+    porcentaje: calcularPorcentaje(data.PROMO2, data.META_PROMO2),
+    porcentaje2: calcularPorcentajeSinLimite(data.PROMO2, data.META_PROMO2)
   }
 
   return[CHANCE, PAGATODO, GANE5, PAGATODO_JAMUNDI, CHOLADITO, DOBLECHANCE, CHANCE_MILLONARIO, ASTRO, LOTERIA_VIRTUAL, LOTERIA_FISICA, BETPLAY, GIROS, SOAT, RECAUDOS, RECARGAS, PROMO1, PROMO2, JUEGOS_AZAR]
