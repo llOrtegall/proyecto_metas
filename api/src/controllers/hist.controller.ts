@@ -23,7 +23,7 @@ export const ConsultarHistorialCategorias = async (req, res) => {
   }
 }
 */
-import { HistModel } from '../models/hist_model'
+import { HistModel } from '../models/hist.model'
 
 import { Request, Response } from "express"
 import { escape } from 'querystring'
