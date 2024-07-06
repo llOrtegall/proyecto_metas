@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "6001:80"
+    volumes:
+      - ./config:/etc/nginx/nginx.conf
+
+  api:
+    image: node:latest
+    ports:
+      - "7001:3000"
+    volumes:
+      - ./api/dist:/app
+    working_dir: /app
+    command: yarn start
+    
