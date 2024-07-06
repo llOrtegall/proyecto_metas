@@ -6,10 +6,9 @@ import { useState, FormEvent } from 'react'
 function LoginPage () {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
 
   const { login } = useAuth()
-
-  // !! FALTA AGREGAR MENSAJES DE ERRORES O ALERTAS!!
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -21,12 +20,18 @@ function LoginPage () {
         }
       })
       .catch(err => {
-        console.error(err)
+        const message = err.response.data.message
+        setError(message)
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setError('')
+        }, 5000)
       })
   }
 
   return (
-    <section className='w-full h-[100vh] flex flex-col items-center justify-center bg-gradient-to-b from-gray-400 to-gray-200'>
+    <section className='w-full h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-400 to-gray-200 relative'>
 
       <form className='w-96 mb-2 border p-12 rounded-lg bg-white/30 flex flex-col gap-4 shadow-xl' onSubmit={handleSubmit}>
         <figure className='flex justify-center'>
@@ -38,10 +43,8 @@ function LoginPage () {
           <div className='flex items-center w-full justify-around gap-4'>
             <UserIcon />
             <input
-              onChange={e => setUsername(e.target.value)}
-              name='username' type='text' placeholder='CV1118*****'
-              className='w-full p-2 rounded-md border-none outline-none'
-              required autoComplete='username'
+              onChange={e => setUsername(e.target.value)} name='username' type='text' placeholder='CV1118*****'
+              className='w-full p-2 rounded-md border-none outline-none' required autoComplete='username'
             />
           </div>
         </article>
@@ -51,10 +54,8 @@ function LoginPage () {
           <div className='flex items-center w-full justify-around gap-4'>
             <LockIcon />
             <input
-              onChange={e => setPassword(e.target.value)}
-              name='password' type='password' placeholder='**********'
-              className='w-full p-2 rounded-md border-none outline-none'
-              required
+              onChange={e => setPassword(e.target.value)} name='password' type='password' placeholder='**********'
+              className='w-full p-2 rounded-md border-none outline-none' required
             />
           </div>
         </article>
@@ -65,6 +66,10 @@ function LoginPage () {
           Iniciar Sesión
         </button>
       </form>
+
+      <section className='absolute bottom-32 '>
+        {error && <p className='text-red-500 font-semibold'>{error}</p>}
+      </section>
 
     </section>
 
