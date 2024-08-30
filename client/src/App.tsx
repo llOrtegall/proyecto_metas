@@ -12,7 +12,7 @@ import AspDiaPage from './pages/ApsDia'
 import { PDVINFO } from './types/Pdv'
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://localhost:3000/api/v1'
+axios.defaults.baseURL = import.meta.env.VITE_URL_API
 
 // TODO: a futuro debemos aplicar lazy load para la carga de las paginas ya que el bundle es muy grande
 function App () {
