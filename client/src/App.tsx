@@ -12,7 +12,7 @@ import AspDiaPage from './pages/ApsDia'
 import { PDVINFO } from './types/Pdv'
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://localhost:3000/api/v1'
+axios.defaults.baseURL = import.meta.env.VITE_URL_API
 
 // TODO: a futuro debemos aplicar lazy load para la carga de las paginas ya que el bundle es muy grande
 function App () {
@@ -50,7 +50,7 @@ function App () {
           <Route path='/aspiracionDia' element={<AspDiaPage codigo={user.codigo} zona={pdv.ZONA} />} />
           <Route path='/aspiracionMesActual' element={<AspMesPage codigo={user.codigo} zona={pdv.ZONA} />} />
           <Route path='/aspiracionMesAnterior' element={<AspMenAntPage codigo={user.codigo} zona={pdv.ZONA} />} />
-          <Route path='/sugeridos' element={<SugeridosPage />} />
+          <Route path='/sugeridos' element={<SugeridosPage zone={pdv.ZONA} user={user} />} />
           <Route path='/historial' element={<HistCatPage codigo={user.codigo} />} />
         </Route>
       </Routes>
