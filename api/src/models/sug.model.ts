@@ -1,7 +1,75 @@
 import { MetasConn } from '../connections/metasConn'
-import { Model, DataTypes } from 'sequelize'
+import { Model, DataTypes, Optional } from 'sequelize'
 
-class SugModel extends Model {}
+type SugAttributes = {
+  FECHA: Date
+  ZONA: number
+  CCOSTO: number
+  SUCURSAL: number
+  VTA_CHANCE: number
+  VTA_PAGAMAS: number
+  VTA_PAGATODO: number
+  VTA_GANE5: number
+  VTA_PATA_MILLONARIA: number
+  VTA_DOBLECHANCE: number
+  VTA_CHANCE_MILLONARIO: number
+  META_SUG1: number
+  META_SUG2: number
+  META_SUG3: number
+  META_SUG4: number
+  META_SUG5: number
+  META_SUG6: number
+  META_SUG7: number
+  META_SUG8: number
+  USUARIO: string
+  SUGERIDO1: string
+  SUGERIDO2: string
+  SUGERIDO3: string
+  SUGERIDO4: string
+  SUGERIDO5: string
+  SUGERIDO6: string
+  SUGERIDO7: string
+  SUGERIDO8: string
+  VERSION1: string
+  VERSION2: string
+  NOMBRES: string
+}
+
+type SugCreationAttributes = Optional<SugAttributes, 'FECHA'>
+
+class SugModel extends Model<SugCreationAttributes, SugAttributes> {
+  declare FECHA: Date
+  declare ZONA: number
+  declare CCOSTO: number
+  declare SUCURSAL: number
+  declare VTA_CHANCE: number
+  declare VTA_PAGAMAS: number
+  declare VTA_PAGATODO: number
+  declare VTA_GANE5: number
+  declare VTA_PATA_MILLONARIA: number
+  declare VTA_DOBLECHANCE: number
+  declare VTA_CHANCE_MILLONARIO: number
+  declare META_SUG1: number
+  declare META_SUG2: number
+  declare META_SUG3: number
+  declare META_SUG4: number
+  declare META_SUG5: number
+  declare META_SUG6: number
+  declare META_SUG7: number
+  declare META_SUG8: number
+  declare USUARIO: string
+  declare SUGERIDO1: string
+  declare SUGERIDO2: string
+  declare SUGERIDO3: string
+  declare SUGERIDO4: string
+  declare SUGERIDO5: string
+  declare SUGERIDO6: string
+  declare SUGERIDO7: string
+  declare SUGERIDO8: string
+  declare VERSION1: string
+  declare VERSION2: string
+  declare NOMBRES: string
+}
 
 SugModel.init({
   FECHA: { type: DataTypes.DATE, allowNull: false, primaryKey: true },
@@ -42,3 +110,4 @@ SugModel.init({
   timestamps: false
 })
 
+export { SugModel }
