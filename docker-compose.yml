@@ -1,19 +1,27 @@
 version: '3.7'
 
 services:
-  web:
-    image: nginx:latest
-    ports:
-      - "6001:80"
+  web-metas:
+    image: nginx:stable-alpine3.19-slim
+    container_name: web-metas
     volumes:
-      - ./config:/etc/nginx/nginx.conf
+      - ./client/dist:/usr/share/nginx/html
+      - ./config/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - api-metas
+    networks:
+      - red-gane-int
 
-  api:
-    image: node:latest
-    ports:
-      - "7001:3000"
-    volumes:
-      - ./api/dist:/app
-    working_dir: /app
-    command: yarn start
+  api-metas:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: api-metas
+    image: api-metas:v1.0
+    networks:
+      - red-gane-int
+
+networks:
+  red-gane-int:
+    external: true
     
