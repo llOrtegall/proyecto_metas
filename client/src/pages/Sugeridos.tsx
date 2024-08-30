@@ -9,6 +9,9 @@ function SugeridosPage ({ zone, user }:{zone: string, user: User}) {
   const { data } = useSugeridos({ zone, user })
   const { data2 } = useSugeridos2({ zone, user })
 
+  console.log(data)
+  console.log(data2)
+
   return (
     <section className='flex flex-col mx-2'>
       <h1 className='text-center text-3xl font-semibold py-2'>Sugeridos Del Día </h1>
@@ -19,7 +22,7 @@ function SugeridosPage ({ zone, user }:{zone: string, user: User}) {
         </article>
 
         {
-          data2
+          data && data2 && data2.VTA_SUGERIDO > data.VTA_SUGERIDO
             ? (
               <article className='2xl:grid-cols-2 gap-2 2xl:gap-6'>
                 <ProgressSugerido data={data2} />
