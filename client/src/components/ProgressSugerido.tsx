@@ -35,27 +35,29 @@ export function ProgressSugerido ({ data }) {
 
       <article className='flex'>
         <p> Formularios Impresos: {DeterminarMeta(data.SUGERIDO1 || data.SUGERIDO2, data.VTA_SUGERIDO)}</p>
-        <span className='pl-4 font-semibold'>{''}</span>
+        <span className='pl-4 font-semibold' />
       </article>
 
-     <article className='flex flex-col items-center'>
-        <p className="text-center  dark:text-dark-tremor-content flex items-center justify-start gap-4">
+      <article className='flex flex-col items-center'>
+        <p className='text-center  dark:text-dark-tremor-content flex items-center justify-start gap-4'>
           <p> <span>Progeso Actual: </span> &bull; {porcentaje || 0} %</p>
         </p>
-         <ProgressBar value={porcentaje}
+        <ProgressBar
+          value={porcentaje}
           color={color}
-          className="mt-3" />
+          className='mt-3'
+        />
       </article>
 
       <article>
         {
            porcentaje >= 100
              ? (
-              <p className='pt-2 text-center'>Buen Trabajo 😁 - Meta Completada ✅  </p>
+               <p className='pt-2 text-center'>Buen Trabajo 😁 - Meta Completada ✅  </p>
                )
              : null
         }
-        </article>
+      </article>
     </Card>
   )
 }

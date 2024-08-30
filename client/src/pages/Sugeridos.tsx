@@ -3,8 +3,9 @@ import { useSugeridos2 } from '../hooks/useSugeridos2'
 
 import { ProgressSugerido } from '../components/ProgressSugerido'
 import { ConsultarBoletasGanadas } from '../components/BoletaGanada'
+import { User } from '../types/User'
 
-function SugeridosPage ({}) {
+function SugeridosPage ({ zone, user }:{zone: string, user: User}) {
   const { data } = useSugeridos({ zone, user })
   const { data2 } = useSugeridos2({ zone, user })
 
