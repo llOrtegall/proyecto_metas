@@ -1,5 +1,6 @@
-import { Card, ProgressBar } from '@tremor/react'
 import { calcularPorcentaje, determineProgressColor } from '../utils/progress'
+import { Product, Sugeridos } from '../types/Metas'
+import { Card, ProgressBar } from '@tremor/react'
 
 const productMetaMap = {
   CHANCE: 500,
@@ -13,7 +14,7 @@ const productMetaMap = {
   GANE5: 1000
 }
 
-function DeterminarMeta (product, meta) {
+function DeterminarMeta (product: Product, meta: number): number {
   const divisor = productMetaMap[product]
   if (divisor) {
     return Math.ceil(meta / divisor)
@@ -21,20 +22,20 @@ function DeterminarMeta (product, meta) {
   return Math.ceil(meta)
 }
 
-export function ProgressSugerido ({ data }) {
-  const porcentaje = calcularPorcentaje(data?.VTA_SUGERIDO, data?.META_SUGERIDO1)
-  const color = determineProgressColor(porcentaje)
+export function ProgressSugerido ({ data }: { data: Sugeridos}) {
+  const porcentaje = calcularPorcentaje(data?.VTA_SUGERIDO, data?.META_SUG1)
+  const color = determineProgressColor(parseFloat(porcentaje))
 
   return (
     <Card className={`mx-auto mt-2 w-full flex flex-col gap-4 bg-${color}-200`}>
       <article className='flex gap-4 items-center justify-center'>
-        <h2 className='font-semibold text-lg'>PRODUCTO SUGERIDO {data.SUGERIDO1 || data.SUGERIDO2 || 'Aun No Se Ha Definido'}</h2>
+        <h2 className='font-semibold text-lg'>PRODUCTO SUGERIDO {data.SUGERIDO1 || 'Aun No Se Ha Definido'}</h2>
         <span>-</span>
-        <h2 className='font-semibold text-lg'>N° Sugeridos Del Día {DeterminarMeta(data.SUGERIDO1 || data.SUGERIDO2, data.META_SUGERIDO1) || '0'}</h2>
+        <h2 className='font-semibold text-lg'>N° Sugeridos Del Día {DeterminarMeta(data.SUGERIDO1, data?.META_SUG1) || '0'}</h2>
       </article>
 
       <article className='flex'>
-        <p> Formularios Impresos: {DeterminarMeta(data.SUGERIDO1 || data.SUGERIDO2, data.VTA_SUGERIDO)}</p>
+        <p> Formularios Impresos: {DeterminarMeta(data.SUGERIDO1, data.VTA_SUGERIDO)}</p>
         <span className='pl-4 font-semibold' />
       </article>
 
@@ -42,16 +43,12 @@ export function ProgressSugerido ({ data }) {
         <p className='text-center  dark:text-dark-tremor-content flex items-center justify-start gap-4'>
           <p> <span>Progeso Actual: </span> &bull; {porcentaje || 0} %</p>
         </p>
-        <ProgressBar
-          value={porcentaje}
-          color={color}
-          className='mt-3'
-        />
+        <ProgressBar value={parseFloat(porcentaje)} color={color} className='mt-3' />
       </article>
 
       <article>
         {
-           porcentaje >= 100
+           parseFloat(porcentaje) >= 100
              ? (
                <p className='pt-2 text-center'>Buen Trabajo 😁 - Meta Completada ✅  </p>
                )

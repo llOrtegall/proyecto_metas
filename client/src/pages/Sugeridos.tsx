@@ -10,12 +10,12 @@ function SugeridosPage ({ zone, user }:{zone: string, user: User}) {
   const { data2 } = useSugeridos2({ zone, user })
 
   return (
-    <section className='flex flex-col'>
+    <section className='flex flex-col mx-2'>
       <h1 className='text-center text-3xl font-semibold py-2'>Sugeridos Del Día </h1>
 
       <main className='2xl:flex items-center gap-4'>
         <article className='2xl:grid-cols-2 gap-2 2xl:gap-6'>
-          <ProgressSugerido data={data} />
+          {data && <ProgressSugerido data={data} />}
         </article>
 
         {

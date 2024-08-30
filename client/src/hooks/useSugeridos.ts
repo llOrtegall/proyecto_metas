@@ -1,10 +1,11 @@
 import { getSugeridos1 } from '../services/getSugeridos'
 import { useEffect, useState } from 'react'
 import { User } from '../types/User'
+import { Sugeridos } from '../types/Metas'
 
 export const useSugeridos = ({ zone, user }:{ zone: string, user: User}) => {
   const { username, codigo } = user
-  const [data, setData] = useState({})
+  const [data, setData] = useState<Sugeridos | null>(null)
   const [error, setError] = useState(null)
 
   useEffect(() => {
