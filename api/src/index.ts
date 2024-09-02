@@ -8,6 +8,7 @@ import { routerMetas } from './routes/metas.routes'
 import { UserRouter } from './routes/user.routes';
 import { RouteHist } from './routes/hist.routes'
 import { RouteSuge } from './routes/suge.routes'
+import { RouteHoras } from './routes/horas.routes';
 
 const PORT = process.env.PORT || 3030
 const app = express();
@@ -23,6 +24,7 @@ app.use(v1, infopdvRouter)
 app.use(v1, routerMetas)
 app.use(v1, RouteHist)
 app.use(v1, RouteSuge)
+app.use(v1, RouteHoras)
 
 app.get('/api/v1/dataTime', async (_req, res) => {
   try {
