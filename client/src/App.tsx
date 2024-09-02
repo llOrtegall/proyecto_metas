@@ -11,6 +11,7 @@ import AspMesPage from './pages/AspMes'
 import AspDiaPage from './pages/ApsDia'
 import { PDVINFO } from './types/Pdv'
 import axios from 'axios'
+import { ProductHorasGraf } from './components/HorasGraf'
 
 axios.defaults.baseURL = import.meta.env.VITE_URL_API
 
@@ -52,6 +53,7 @@ function App () {
           <Route path='/aspiracionMesAnterior' element={<AspMenAntPage codigo={user.codigo} zona={pdv.ZONA} />} />
           <Route path='/sugeridos' element={<SugeridosPage zone={pdv.ZONA} user={user} />} />
           <Route path='/historial' element={<HistCatPage codigo={user.codigo} />} />
+          <Route path='/producto/:producto' element={<ProductHorasGraf />} />
         </Route>
       </Routes>
     </>
