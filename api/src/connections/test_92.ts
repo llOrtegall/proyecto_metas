@@ -13,8 +13,7 @@ const config: PoolOptions = {
   user: TEST_70_DB_USER,
   password: TEST_70_DB_PASSWORD,
   database: TEST_70_DB_DATABASE,
-  multipleStatements: true,
-  timezone: '-05:00',
+  multipleStatements: true
 }
 
 const pool_test = createPool(config)
