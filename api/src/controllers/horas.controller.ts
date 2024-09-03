@@ -22,7 +22,7 @@ export const HorasBySucursal = async (req: Request, res: Response) => {
 
   try {
     const table = `table_${id}`
-    const query = `SELECT * FROM ${table} WHERE FECHA = CURDATE();`
+    const query = `SELECT * FROM ${table} WHERE FECHA = CURDATE() ORDER BY HORA ASC;`
 
 
     const [rows] = await pool_test.execute(query);
