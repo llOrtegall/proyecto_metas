@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import { determineProgressColor } from '../../utils/funtions'
 import { Card, ProgressBar } from '@tremor/react'
 
@@ -14,16 +14,16 @@ export function BarraProgressProduct ({ pruducto, ventaActual, aspiracionDia, pe
   // Formatea los números con la notación de Colombia
   const ventaActualFormateada = ventaActual.toLocaleString('es-CO')
   const aspiracionDiaFormateada = aspiracionDia.toLocaleString('es-CO')
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const progressColor = determineProgressColor(percentage)
 
-  const handleClick = () => {
-    navigate(`/producto/${pruducto}`)
-  }
+  // const handleClick = () => {
+  //   navigate(`/producto/${pruducto}`)
+  // }
 
   return (
-    <Card className={`mx-auto bg-${progressColor}-100 text-sm flex flex-col gap-2 dark:text-white shadow-md`} onClick={handleClick}>
+    <Card className={`mx-auto bg-${progressColor}-100 text-sm flex flex-col gap-2 dark:text-white shadow-md`}>
 
       <h2 className='flex justify-between'>
         <span className='font-bold'>{pruducto}</span>
