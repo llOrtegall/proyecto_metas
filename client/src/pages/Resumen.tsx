@@ -16,7 +16,7 @@ interface PropsResumen {
 
 function ResumenPage ({ nombres, codigo, username, catergoria, version }: PropsResumen) {
   const [data, setData] = useState({ venta_actual: 0, aspiracion: 0, cumplimiento: 0 })
-  const [util, setUtil] = useState({ cc_asesor: '', comision: 0 })
+  const [util, setUtil] = useState<{ cc_asesor: string, comision: number } | null>(null)
 
   useEffect(() => { axios.get(`/utilidades/${username.slice(2)}`).then(res => setUtil(res.data)) }, [])
 
@@ -61,22 +61,32 @@ function ResumenPage ({ nombres, codigo, username, catergoria, version }: PropsR
         <RenderCategoria cat={catergoria} ver={version} />
       </figure>
 
-      <section className='bg-slate-300 dark:bg-slate-900 rounded-md dark:border dark:border-gray-500 mb-2'>
-        <table className='w-full table-auto border-collapse'>
-          <thead>
-            <tr>
-              <th>N° Documento</th>
-              <th>Referencia</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{util.cc_asesor}</td>
-              <td>{util.comision}</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+      {
+        util !== null
+          ? (
+            <section className='bg-slate-300 dark:bg-slate-900 rounded-md dark:border dark:border-gray-500 mb-2'>
+              <table className='w-full table-auto border-collapse'>
+                <thead>
+                  <tr>
+                    <th>N° Documento</th>
+                    <th>Referencia</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{util.cc_asesor}</td>
+                    <td>{util.comision}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+            )
+          : (
+            <section>
+              <p>No se encontró información de la utilidad</p>
+            </section>
+            )
+      }
 
     </section>
   )
