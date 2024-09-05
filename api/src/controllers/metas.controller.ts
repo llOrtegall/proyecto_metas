@@ -9,6 +9,7 @@ import { Request, Response } from "express"
 import { escape } from 'querystring'
 import { fn } from "sequelize"
 import { calcularPorcentaje } from '../utils/funtionsReutilizables'
+import { Utilidades } from '../models/utilidades.model'
 
 export const metasDelDia = async (req: Request, res: Response) => {
   const { codigo } = req.body
@@ -121,6 +122,21 @@ export const vtaMesAntPro = async (req: Request, res: Response) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: 'Hubo un problema al obtener el cumplimiento del mes anterior por producto. Por favor, inténtalo de nuevo más tarde.' })
+  }
+}
+
+export const getUtilidades = async (req:Request, res:Response) => {
+  const { cedula } = req.query as { cedula: string }
+
+  if (!cedula) {
+    return res.status(400).json({ error: 'Falta el cédula' })
+  }
+
+  try {
+    const data = await Utilidades.findOne({ where: { cc_asesor: cedula } })
+    return res.status(200).json(data)
+  } catch (error) {
+    return res.status(500).json({ error: 'Error al consultar Table' })
   }
 }
 

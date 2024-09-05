@@ -3,6 +3,7 @@ import morgan from 'morgan'
 import cors from 'cors'
 import 'dotenv/config'
 
+import { RouteUtilidades } from './routes/utilidades.routes';
 import { infopdvRouter } from './routes/infopdv.routes'
 import { routerMetas } from './routes/metas.routes'
 import { UserRouter } from './routes/user.routes';
@@ -25,6 +26,7 @@ app.use(v1, routerMetas)
 app.use(v1, RouteHist)
 app.use(v1, RouteSuge)
 app.use(v1, RouteHoras)
+app.use(v1, RouteUtilidades)
 
 app.get('/api/v1/dataTime', async (_req, res) => {
   try {
