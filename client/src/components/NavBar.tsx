@@ -2,7 +2,6 @@ import { CalendarAntIcon, CalendarIcon, Dashboard, DocsIcon, SunIcon, CategoriaI
 import { useTheme } from '../context/ThemeContext'
 import { NavLinkItem } from './ui/NavLinkItem'
 import { useAuth } from '../auth/AuthContext'
-import { LogoImage } from './ui/LogoImage'
 import { Switch } from '@tremor/react'
 
 const navLinks = [
@@ -20,7 +19,9 @@ export function NavBar () {
 
   return (
     <ul className='flex flex-col h-screen items-center justify-around'>
-      <LogoImage zona={39627} key={39627} />
+      <figure>
+        <img src='/gane.webp' alt='logo gane' className='w-36 2xl:w-44' />
+      </figure>
 
       <li className='flex flex-col gap-4 2xl:gap-6 3xl:gap-8 font-semibold dark:text-white'>
         {navLinks.map(link => <NavLinkItem key={link.id} path={link.path} icon={link.icon} label={link.label} />)}
