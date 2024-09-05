@@ -22,7 +22,7 @@ function SugeridosPage ({ zone, user }:{zone: string, user: User}) {
         </article>
 
         {
-          data && data2 && data2.VTA_SUGERIDO > data.VTA_SUGERIDO
+          data && data2?.VTA_SUGERIDO && data.VTA_SUGERIDO > data.META_SUG1
             ? (
               <article className='2xl:grid-cols-2 gap-2 2xl:gap-6'>
                 <ProgressSugerido data={data2} />
