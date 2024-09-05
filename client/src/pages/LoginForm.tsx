@@ -2,11 +2,11 @@ import { UserIcon, LockIcon } from '../components/icons'
 import { getLogin } from '../services/LoginServices'
 import { useAuth } from '../auth/AuthContext'
 import { useState, FormEvent } from 'react'
+import { Toaster, toast } from 'sonner'
 
 function LoginPage () {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
 
   const { login } = useAuth()
 
@@ -21,19 +21,15 @@ function LoginPage () {
       })
       .catch(err => {
         const message = err.response.data.message
-        setError(message)
-      })
-      .finally(() => {
-        setTimeout(() => {
-          setError('')
-        }, 5000)
+        toast.error(message, { description: 'Hubo un problema al iniciar sesión' })
       })
   }
 
   return (
-    <section className='w-full h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-400 to-gray-200 relative'>
+    <section className='w-full h-screen flex flex-col items-center justify-center  relative'>
+      <div className='absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]'><div className='absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_800px_at_100%_200px,#d5c5ff,transparent)]' /></div>
 
-      <form className='w-96 mb-2 border p-12 rounded-lg bg-white/30 flex flex-col gap-4 shadow-xl' onSubmit={handleSubmit}>
+      <form className='w-96 mb-2 p-12 rounded-lg bg-transparent/10 flex flex-col gap-4 shadow-xl' onSubmit={handleSubmit}>
         <figure className='flex justify-center'>
           <img src='/gane.webp' width={180} />
         </figure>
@@ -67,10 +63,7 @@ function LoginPage () {
         </button>
       </form>
 
-      <section className='absolute bottom-32 '>
-        {error && <p className='text-red-500 font-semibold'>{error}</p>}
-      </section>
-
+      <Toaster richColors position='top-right' duration={5000} visibleToasts={3} />
     </section>
 
   )
