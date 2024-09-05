@@ -5,24 +5,12 @@ import { RowDataPacket } from "mysql2"
 interface IHoras extends RowDataPacket {
   FECHA: string
   HORA: string
+  ASTRO: number
   CHANCE: number
   PAGAMAS: number
   PAGATODO: number
-  PAGATODO_JAMUNDI: number
-  CHOLADITO: number
   PATA_MILLONARIA: number
   DOBLECHANCE: number
-  CHANCE_MILLONARIO: number
-  ASTRO: number
-  LOTERIA_FISICA: number
-  LOTERIA_VIRTUAL: number
-  BETPLAY: number
-  GIROS: number
-  SOAT: number
-  RECAUDOS: number
-  RECARGAS: number
-  created_at: string
-  updated_at: string
 }
 
 export const HorasBySucursal = async (req: Request, res: Response) => {
@@ -34,7 +22,7 @@ export const HorasBySucursal = async (req: Request, res: Response) => {
 
   try {
     const table = `table_${id}`
-    const query = `SELECT * FROM ${table} WHERE FECHA = CURDATE();`
+    const query = `SELECT * FROM ${table} WHERE FECHA = CURDATE() ORDER BY HORA ASC;`
 
 
     const [rows] = await pool_test.execute(query);
