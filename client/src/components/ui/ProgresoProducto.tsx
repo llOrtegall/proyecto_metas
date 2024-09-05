@@ -23,7 +23,7 @@ export function BarraProgressProduct ({ pruducto, ventaActual, aspiracionDia, pe
   }
 
   return (
-    <Card className={`mx-auto bg-${progressColor}-100 text-sm flex flex-col gap-2 dark:text-white shadow-md cursor-pointer hover:border`} onClick={handleClick}>
+    <Card className={`mx-auto bg-${progressColor}-100 text-sm flex flex-col gap-2 dark:text-white shadow-md`} onClick={handleClick}>
 
       <h2 className='flex justify-between'>
         <span className='font-bold'>{pruducto}</span>
