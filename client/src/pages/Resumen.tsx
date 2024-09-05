@@ -16,6 +16,9 @@ interface PropsResumen {
 
 function ResumenPage ({ nombres, codigo, username, catergoria, version }: PropsResumen) {
   const [data, setData] = useState({ venta_actual: 0, aspiracion: 0, cumplimiento: 0 })
+  const [util, setUtil] = useState({ cc_asesor: '', comision: 0 })
+
+  useEffect(() => { axios.get('/utilidades/1118311390').then(res => setUtil(res.data)) }, [])
 
   useEffect(() => {
     if (codigo !== 0) {

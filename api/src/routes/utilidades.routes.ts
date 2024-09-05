@@ -3,4 +3,4 @@ import { getUtilidades } from "../controllers/metas.controller";
 
 export const RouteUtilidades = Router()
 
-RouteUtilidades.get('/utilidades/:cc', getUtilidades)
+RouteUtilidades.get('/utilidades/:cedula', getUtilidades)

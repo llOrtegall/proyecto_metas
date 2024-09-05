@@ -126,7 +126,7 @@ export const vtaMesAntPro = async (req: Request, res: Response) => {
 }
 
 export const getUtilidades = async (req:Request, res:Response) => {
-  const { cedula } = req.query as { cedula: string }
+  const { cedula } = req.params as { cedula: string }
 
   if (!cedula) {
     return res.status(400).json({ error: 'Falta el cédula' })
