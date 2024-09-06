@@ -30,10 +30,8 @@ app.use(v1, RouteUtilidades)
 
 app.get('/api/v1/dataTime', async (_req, res) => {
   try {
-    const response = await fetch('http://worldtimeapi.org/api/timezone/America/Bogota')
-    const data = await response.json()
-    const { datetime } = data // "2024-02-23T09:38:19.557255-05:00"
-    const fecha = datetime.split('T')[0]
+    const time = new Date()
+    const fecha = time.toLocaleString().split(',')[0]    
     res.json({ fecha })
   } catch (error) {
     console.error(error)
@@ -43,10 +41,8 @@ app.get('/api/v1/dataTime', async (_req, res) => {
 
 app.get('/api/v1/dataTime2', async (_req, res) => {
   try {
-    const response = await fetch('http://worldtimeapi.org/api/timezone/America/Bogota')
-    const data = await response.json()
-    const { datetime } = data // "2024-02-23T09:38:19.557255-05:00"
-    const hora = datetime.split('T')[1].split('.')[0]
+    const time = new Date()
+    const hora = time.toLocaleString().split(',')[1]
     res.json({ hora })
   } catch (error) {
     console.error(error)
