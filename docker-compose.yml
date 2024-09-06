@@ -20,6 +20,8 @@ services:
     image: api-metas:v1.0
     networks:
       - red-gane-int
+    environment:
+      - TZ=America/Bogota
 
 networks:
   red-gane-int:
