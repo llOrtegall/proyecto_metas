@@ -106,9 +106,9 @@ function parsearInfoArrayMultired(data: ProductsYumbo) {
     porcentaje: calcularPorcentaje(data.PROMO2, data.META_PROMO2),
     porcentaje2: calcularPorcentajeSinLimite(data.PROMO2, data.META_PROMO2)
   }
-  const SOAT = {
+  const BALOTO = {
     id: 14,
-    producto: 'Soat',
+    producto: 'Baloto',
     ventaActual: data.SOAT,
     aspiracionDia: data.PROMEDIO_DIARIO_SOAT,
     porcentaje: calcularPorcentaje(data.SOAT, data.PROMEDIO_DIARIO_SOAT),
@@ -145,7 +145,7 @@ function parsearInfoArrayMultired(data: ProductsYumbo) {
     porcentaje2: calcularPorcentajeSinLimite(ventaActualAzarCal, aspiracionDiaAzarCal)
   }
 
-  return [ASTRO, CHANCE, CHANCE_MILLONARIO, DOBLECHANCE, PAGAMAS, BETPLAY, PAGATODO, RECARGAS, GANE5, PATA_MILLONARIA, LOTERIA_VIRTUAL, LOTERIA_FISICA, RASPE_LISTO, SOAT, GIROS, RECAUDOS, JUEGOS_AZAR]
+  return [ASTRO, CHANCE, CHANCE_MILLONARIO, DOBLECHANCE, PAGAMAS, BETPLAY, PAGATODO, RECARGAS, GANE5, PATA_MILLONARIA, LOTERIA_VIRTUAL, LOTERIA_FISICA, RASPE_LISTO, BALOTO, GIROS, RECAUDOS, JUEGOS_AZAR]
 }
 
 function parsearInfoArrayServired(data: ProductsJamundi) {
@@ -156,14 +156,6 @@ function parsearInfoArrayServired(data: ProductsJamundi) {
     aspiracionDia: data.PROMEDIO_DIARIO_CHANCE,
     porcentaje: calcularPorcentaje(data.CHANCE, data.PROMEDIO_DIARIO_CHANCE),
     porcentaje2: calcularPorcentajeSinLimite(data.CHANCE, data.PROMEDIO_DIARIO_CHANCE)
-  }
-  const PAGATODO = {
-    id: 2,
-    producto: 'Paga Todo',
-    ventaActual: data.PAGATODO,
-    aspiracionDia: data.PROMEDIO_DIARIO_PAGATODO,
-    porcentaje: calcularPorcentaje(data.PAGATODO, data.PROMEDIO_DIARIO_PAGATODO),
-    porcentaje2: calcularPorcentajeSinLimite(data.PAGATODO, data.PROMEDIO_DIARIO_PAGATODO)
   }
   const GANE5 = {
     id: 3,
@@ -245,9 +237,9 @@ function parsearInfoArrayServired(data: ProductsJamundi) {
     porcentaje: calcularPorcentaje(data.GIROS, data.PROMEDIO_DIARIO_GIROS),
     porcentaje2: calcularPorcentajeSinLimite(data.GIROS, data.PROMEDIO_DIARIO_GIROS)
   }
-  const SOAT = {
+  const BALOTO = {
     id: 13,
-    producto: 'Soat',
+    producto: 'Baloto',
     ventaActual: data.SOAT,
     aspiracionDia: data.PROMEDIO_DIARIO_SOAT,
     porcentaje: calcularPorcentaje(data.SOAT, data.PROMEDIO_DIARIO_SOAT),
@@ -303,18 +295,18 @@ function parsearInfoArrayServired(data: ProductsJamundi) {
     porcentaje2: calcularPorcentajeSinLimite(data.PROMO2, data.META_PROMO2)
   }
 
-  return[CHANCE, PAGATODO, GANE5, PAGATODO_JAMUNDI, CHOLADITO, DOBLECHANCE, CHANCE_MILLONARIO, ASTRO, LOTERIA_VIRTUAL, LOTERIA_FISICA, BETPLAY, GIROS, SOAT, RECAUDOS, RECARGAS, PROMO1, PROMO2, JUEGOS_AZAR]
+  return[CHANCE, BALOTO, GANE5, PAGATODO_JAMUNDI, CHOLADITO, DOBLECHANCE, CHANCE_MILLONARIO, ASTRO, LOTERIA_VIRTUAL, LOTERIA_FISICA, BETPLAY, GIROS, RECAUDOS, RECARGAS, PROMO1, PROMO2, JUEGOS_AZAR]
 }
 
 const PRM = 'PROMEDIO_DIARIO_'
 const Servired = [
-  'CHANCE', 'PAGATODO', 'GANE5', 'PAGATODO_JAMUNDI', 'CHOLADITO', 'DOBLECHANCE', 'CHANCE_MILLONARIO',
+  'CHANCE', 'GANE5', 'PAGATODO_JAMUNDI', 'CHOLADITO', 'DOBLECHANCE', 'CHANCE_MILLONARIO',
   'ASTRO', 'LOTERIA_FISICA', 'LOTERIA_VIRTUAL', 'BETPLAY', 'GIROS', 'SOAT', 'RECAUDOS', 'RECARGAS', 'PROMO1', 'PROMO2',
 
-  'MT_CHANCE', 'MT_PAGATODO', 'MT_GANE5', 'MT_PAGATODO_JAMUNDI', 'MT_CHOLADITO', 'MT_DOBLECHANCE', 'MT_CHANCE_MILLONARIO',
+  'MT_CHANCE', 'MT_GANE5', 'MT_PAGATODO_JAMUNDI', 'MT_CHOLADITO', 'MT_DOBLECHANCE', 'MT_CHANCE_MILLONARIO',
   'MT_ASTRO', 'MT_LOTERIA_FISICA', 'MT_LOTERIA_VIRTUAL', 'MT_BETPLAY', 'MT_GIROS', 'MT_SOAT', 'MT_RECAUDOS', 'MT_RECARGAS', 'META_PROMO1', 'META_PROMO2',
 
-  `${PRM}SOAT`, `${PRM}CHANCE`, `${PRM}PAGATODO`, `${PRM}GANE5`, `${PRM}PGTJAMUNDI`,
+  `${PRM}SOAT`, `${PRM}CHANCE`, `${PRM}GANE5`, `${PRM}PGTJAMUNDI`,
   `${PRM}CHOLADITO`, `${PRM}DOBLECHANCE`, `${PRM}CHMILL`, `${PRM}ASTRO`,
   `${PRM}LV`, `${PRM}LF`, `${PRM}BETPLAY`, `${PRM}GIROS`, `${PRM}RECAUDOS`, `${PRM}RECARGAS`
 ]

@@ -50,7 +50,6 @@ export interface ProductsYumbo {
 
 export interface ProductsJamundi {
   CHANCE: number
-  PAGATODO: number
   GANE5: number
   PAGATODO_JAMUNDI: number
   CHOLADITO: number
@@ -67,7 +66,6 @@ export interface ProductsJamundi {
   PROMO1: number
   PROMO2: number
   MT_CHANCE: number
-  MT_PAGATODO: number
   MT_GANE5: number
   MT_PAGATODO_JAMUNDI: number
   MT_CHOLADITO: number
@@ -86,7 +84,6 @@ export interface ProductsJamundi {
   META_PROMO2: number
   PROMEDIO_DIARIO_SOAT: number
   PROMEDIO_DIARIO_CHANCE: number
-  PROMEDIO_DIARIO_PAGATODO: number
   PROMEDIO_DIARIO_GANE5: number
   PROMEDIO_DIARIO_PGTJAMUNDI: number
   PROMEDIO_DIARIO_CHOLADITO: number
