@@ -1,9 +1,9 @@
+import { UserPayload } from "../types/interfaces";
+import { HistLogin } from '../models/hist-login'
 import { Request, Response } from "express";
 import { User } from '../models/user.model';
-import { HistLogin } from '../models/hist-login'
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
-import { UserPayload } from "../types/interfaces";
 
 const JWT_SECRET = process.env.JWT_SECRET as string;
 
@@ -52,27 +52,33 @@ export async function Login(req: Request, res: Response) {
 }
 
 export async function UserByToken(req: Request, res: Response) {
-  const bearerHeader = req.headers.authorization
+  const bearerHeader = req.headers.authorization;
 
   if (!bearerHeader) {
-    return res.status(401).json({ message: 'No Token Provided' })
+    return res.status(401).json({ message: 'No Token Provided' });
   }
 
-  const bearer = bearerHeader.split(' ')
-  const token = bearer[1]
+  const bearer = bearerHeader.split(' ');
+  const token = bearer[1];
 
   try {
-    const result = jwt.verify(token, JWT_SECRET)
+    const result = jwt.verify(token, JWT_SECRET);
 
-    if (!result) return res.status(401).json({ message: 'Invalid Token' })
+    if (!result) return res.status(401).json({ message: 'Invalid Token' });
 
-    const data = result as UserPayload
-    await HistLogin.sync()
-    await HistLogin.create({ username: data.username, sucursal: 1 })
+    const data = result as UserPayload;
+    await HistLogin.sync();
 
-    return res.status(200).json(result)
+    try {
+      await HistLogin.create({ username: data.username, sucursal: 1 });
+    } catch (error) {
+      console.log('Ya Se genero un registro del logueo');
+    }
+
+    // Continuar y retornar el resultado del token
+    return res.status(200).json(result);
   } catch (error) {
     console.log(error);
-    return res.status(401).json({ error })
+    return res.status(401).json({ error });
   }
 }
