@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
 import { User } from '../models/user.model';
+import { HistLogin } from '../models/hist-login'
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
+import { UserPayload } from "../types/interfaces";
 
 const JWT_SECRET = process.env.JWT_SECRET as string;
 
@@ -16,7 +18,7 @@ export async function getUsers(req: Request, res: Response) {
   }
 }
 
-export async function Login(req:Request, res:Response) {
+export async function Login(req: Request, res: Response) {
   const { username, password } = req.body
 
   if (!username || !password) {
@@ -49,7 +51,7 @@ export async function Login(req:Request, res:Response) {
   }
 }
 
-export async function UserByToken(req: Request, res: Response){
+export async function UserByToken(req: Request, res: Response) {
   const bearerHeader = req.headers.authorization
 
   if (!bearerHeader) {
@@ -61,6 +63,13 @@ export async function UserByToken(req: Request, res: Response){
 
   try {
     const result = jwt.verify(token, JWT_SECRET)
+
+    if (!result) return res.status(401).json({ message: 'Invalid Token' })
+
+    const data = result as UserPayload
+    await HistLogin.sync()
+    await HistLogin.create({ username: data.username, sucursal: 1 })
+
     return res.status(200).json(result)
   } catch (error) {
     console.log(error);

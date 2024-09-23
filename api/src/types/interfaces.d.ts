@@ -107,3 +107,13 @@ export interface IProduct {
   porcentaje: number
   porcentaje2: number
 }
+
+export interface UserPayload {
+  codigo: number;
+  username: string;
+  password: string;
+  estado: string;
+  nombres: string;
+  iat: number;
+  exp: number;
+}
