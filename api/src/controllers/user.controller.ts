@@ -70,7 +70,7 @@ export async function UserByToken(req: Request, res: Response) {
     await HistLogin.sync();
 
     try {
-      await HistLogin.create({ username: data.username, sucursal: 1 });
+      await HistLogin.create({ username: data.username, sucursal: data.codigo });
     } catch (error) {
       console.log('Ya Se genero un registro del logueo');
     }
