@@ -55,6 +55,7 @@ export interface ProductsJamundi {
   CHOLADITO: number
   DOBLECHANCE: number
   CHANCE_MILLONARIO: number
+  PATA_MILLONARIA: number
   ASTRO: number
   LOTERIA_FISICA: number
   LOTERIA_VIRTUAL: number

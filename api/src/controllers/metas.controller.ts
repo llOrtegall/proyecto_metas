@@ -1,15 +1,15 @@
 import { ReturnCompanyAtributesMetProducts, ReturnArrayMetProducts } from '../utils/fnMetasProducts'
 import { ReturnCompanyAtriCumMesActu, ReturArrayCumpMesActProducts } from '../utils/fnCumMesAct'
 
-import { vtaMesAntCump } from '../models/vtaMesAntPro.model'
 import { MetasMesActProd } from '../models/ventaMesActProd.model'
 import { MetasProducts } from '../models/metasproducts.model'
+import { vtaMesAntCump } from '../models/vtaMesAntPro.model'
 
+import { calcularPorcentaje } from '../utils/funtionsReutilizables'
+import { Utilidades } from '../models/utilidades.model'
 import { Request, Response } from "express"
 import { escape } from 'querystring'
 import { fn } from "sequelize"
-import { calcularPorcentaje } from '../utils/funtionsReutilizables'
-import { Utilidades } from '../models/utilidades.model'
 
 export const metasDelDia = async (req: Request, res: Response) => {
   const { codigo } = req.body
