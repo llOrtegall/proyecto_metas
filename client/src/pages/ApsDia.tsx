@@ -1,9 +1,9 @@
 import { BarraProgressProduct } from '../components/ui/ProgresoProducto'
+import { HeaderComponent } from '../components/ui/headerComponent'
 import { useFecthMetasData } from '../hooks/useFetchData'
 import { sortData } from '../utils/funtions'
 import { MetasProps } from '../types/Metas'
 import { useMemo, useState } from 'react'
-import { HeaderComponent } from '../components/ui/headerComponent'
 
 function AspDiaPage ({ codigo, zona }: MetasProps) {
   const { data, isLoading } = useFecthMetasData('/cumpDiaProd', zona, codigo)

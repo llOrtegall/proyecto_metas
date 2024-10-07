@@ -6,16 +6,13 @@ import { fn, Op } from 'sequelize';
 export const HorasBySucursal = async (req: Request, res: Response) => {
   const { id } = req.params
 
-  console.log(id);
-  
-
   if (!id) {
     return res.status(400).json({ message: 'Falta el código del punto de venta' })
   }
 
   try {
     const result = await Horas.findAll({
-      attributes: ['hora', 'chance', 'gane5', 'astro'],
+      attributes: ['id', 'hora', 'chance', 'gane5', 'astro'],
       where: {
         sucursal: id,
         fecha: { [Op.and]: { [Op.eq]: fn('CURDATE') } }
