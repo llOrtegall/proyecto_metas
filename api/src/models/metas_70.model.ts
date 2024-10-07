@@ -41,5 +41,7 @@ Horas.init({
 
 }, {
   sequelize: Test70Conn,
-  tableName: 'horas'
+  tableName: 'Meta'
 })
+
+export { Horas, HorasAttributes } 

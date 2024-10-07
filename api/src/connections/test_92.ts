@@ -10,8 +10,7 @@ const TEST_70_DB_DATABASE = process.env.DB_TEST_70_DATABASE!
 const Test70Conn = new Sequelize(TEST_70_DB_DATABASE, TEST_70_DB_USER, TEST_70_DB_PASSWORD, {
   host: TEST_70_DB_HOST,
   port: parseInt(TEST_70_DB_PORT),
-  dialect: 'mariadb',
-  logging: false,
+  dialect: 'mysql',
   timezone: '-05:00',
 })
 
