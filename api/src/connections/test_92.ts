@@ -1,4 +1,4 @@
-import { createPool, PoolOptions } from 'mysql2/promise'
+import { Sequelize } from 'sequelize';
 
 const TEST_70_DB_USER = process.env.DB_TEST_70_USER!
 const TEST_70_DB_PASSWORD = process.env.DB_TEST_70_PASSWORD!
@@ -6,15 +6,13 @@ const TEST_70_DB_HOST = process.env.DB_TEST_70_HOST!
 const TEST_70_DB_PORT = process.env.DB_TEST_70_PORT!
 const TEST_70_DB_DATABASE = process.env.DB_TEST_70_DATABASE!
 
-const config: PoolOptions = {
+
+const Test70Conn = new Sequelize(TEST_70_DB_DATABASE, TEST_70_DB_USER, TEST_70_DB_PASSWORD, {
   host: TEST_70_DB_HOST,
   port: parseInt(TEST_70_DB_PORT),
-  user: TEST_70_DB_USER,
-  password: TEST_70_DB_PASSWORD,
-  database: TEST_70_DB_DATABASE,
-  multipleStatements: true
-}
+  dialect: 'mariadb',
+  logging: false,
+  timezone: '-05:00',
+})
 
-const pool_test = createPool(config)
-
-export { pool_test }
+export { Test70Conn }
