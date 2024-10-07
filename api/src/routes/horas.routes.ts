@@ -3,4 +3,4 @@ import { Router } from 'express';
 
 export const RouteHoras = Router()
 
-RouteHoras.get('/horas/:id', HorasBySucursal)
+RouteHoras.get('/horas/:id/:producto', HorasBySucursal)

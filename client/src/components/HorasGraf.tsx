@@ -1,4 +1,5 @@
 import { useAuth } from '../auth/AuthContext'
+import { useParams } from 'react-router-dom'
 import { AreaChart } from '@tremor/react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -15,8 +16,11 @@ export const ProductHorasGraf = () => {
   const [data, setData] = useState<IHoras[]>([])
   const { user } = useAuth()
 
+  const { producto } = useParams()
+  const param = producto?.toLocaleLowerCase()!;
+
   useEffect(() => {
-    axios.get(`/horas/${user.codigo}`)
+    axios.get(`/horas/${user.codigo}/${param}`)
       .then(res => setData(res.data))
       .catch(err => console.log(err))
   }, [])
