@@ -1,5 +1,4 @@
 import { createPool, PoolOptions } from 'mysql2/promise'
-import 'dotenv/config'
 
 const TEST_70_DB_USER = process.env.DB_TEST_70_USER as string
 const TEST_70_DB_PASSWORD = process.env.DB_TEST_70_PASSWORD

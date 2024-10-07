@@ -1,5 +1,4 @@
 import { Sequelize } from 'sequelize'
-import 'dotenv/config'
 
 const METAS_DB_USER = process.env.DB_METAS_USER as string
 const METAS_DB_PASSWORD = process.env.DB_METAS_PASSWORD

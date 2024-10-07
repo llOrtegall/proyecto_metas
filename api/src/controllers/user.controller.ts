@@ -3,7 +3,6 @@ import { HistLogin } from '../models/hist-login'
 import { Request, Response } from "express";
 import { User } from '../models/user.model';
 import jwt from 'jsonwebtoken';
-import 'dotenv/config';
 
 const JWT_SECRET = process.env.JWT_SECRET as string;
 
