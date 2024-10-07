@@ -8,33 +8,78 @@ interface IHoras {
   id: number
   hora: string
   chance: number
-  gane5: number
-  astro: number
 }
 
+const data = [
+  {
+    "id": 44,
+    "hora": "13:00:00",
+    "chance": 435353,
+    "meta": 400000
+  },
+  {
+    "id": 193,
+    "hora": "13:30:00",
+    "chance": 445613,
+    "meta": 300000
+  },
+  {
+    "id": 342,
+    "hora": "14:00:00",
+    "chance": 445613,
+    "meta": 200000
+  },
+  {
+    "id": 491,
+    "hora": "14:30:00",
+    "chance": 452659,
+    "meta": 400000
+  },
+  {
+    "id": 640,
+    "hora": "15:00:00",
+    "chance": 484383,
+    "meta": 300000
+  }, 
+  {
+    "meta": 300000,
+  }, 
+  {
+    "meta": 400000,
+  },
+  {
+    "meta": 200000,
+  }, 
+  {
+    "meta": 100000,
+  }
+]
+
 export const ProductHorasGraf = () => {
-  const [data, setData] = useState<IHoras[]>([])
-  const { user } = useAuth()
+  // const [data, setData] = useState<IHoras[]>([])
+  // const { user } = useAuth()
 
-  const { producto } = useParams()
-  const param = producto?.toLocaleLowerCase()!;
+  // const { producto } = useParams()
+  // const param = producto?.toLocaleLowerCase()!;
 
-  useEffect(() => {
-    axios.get(`/horas/${user.codigo}/${param}`)
-      .then(res => setData(res.data))
-      .catch(err => console.log(err))
-  }, [])
+  // useEffect(() => {
+  //   axios.get(`/horas/${user.codigo}/${param}`)
+  //     .then(res => setData(res.data))
+  //     .catch(err => console.log(err))
+  // }, [])
+
+  // console.log(data);
 
   return (
     <section className='h-[80vh] flex items-center justify-center mx-4'>
-      {/* <AreaChart
-        data={Astro} index='hora'
-        categories={['ventaActual', 'aspiracionDia']}
-        colors={['violet', 'cyan']}
+      <AreaChart
+        data={data} index='hora'
+        categories={['chance', 'meta']}
+        colors={['green', 'rose']}
         valueFormatter={(number: number) =>
-          `$${Intl.NumberFormat('us').format(number).toString()}`}
+          `${Intl.NumberFormat('CO').format(number).toString()}`}
         onValueChange={(v) => console.log(v)}
-      /> */}
+      />
     </section>
   )
 }
